@@ -16,6 +16,7 @@ public class Homepage {
     private final By signUpLoginLink = By.cssSelector(".nav.navbar-nav > li:nth-of-type(4) > a");
     private final By loggedInAsUser = By.cssSelector("li:nth-of-type(10) > a");
     private final By deleteAccountLink = By.cssSelector(".nav.navbar-nav > li:nth-of-type(5) > a");
+    private final By logoutUserLink  = By.cssSelector(".nav.navbar-nav > li:nth-of-type(4) > a");
 
     public WebElement getLogoElement() {
         return driver.findElement(logo);
@@ -31,6 +32,11 @@ public class Homepage {
 
     public void clickOnDeleteAccountLink(){
         element = driver.findElement(deleteAccountLink);
+        element.click();
+    }
+
+    public void clickOnLogoutUserLink(){
+        element = driver.findElement(logoutUserLink);
         element.click();
     }
 
