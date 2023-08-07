@@ -17,6 +17,10 @@ public class SignupAndLoginPage {
     private final By signUpNameField = By.cssSelector("[type='text']");
     private final By signUpEmailField = By.cssSelector("[action='\\/signup'] [type='email']");
     private final By signUpButton = By.cssSelector("[action='\\/signup'] .btn-default");
+    private final By loginText = By.cssSelector(".login-form > h2");
+    private final By loginEmailAdressField = By.cssSelector("[action='\\/login'] [type='email']");
+    private final By loginPasswordField = By.cssSelector("[type='password']");
+    private final By loginButton = By.cssSelector("[action='\\/login'] .btn-default");
 
     public WebElement getSignUpTextElement(){
         return driver.findElement(signUpText);
@@ -42,5 +46,13 @@ public class SignupAndLoginPage {
         element = driver.findElement(signUpButton);
         element.click();
     }
+
+
+    public void clickOnLoginButton() {
+        element = driver.findElement(loginButton);
+        element.click();
+    }
+
+
 
 }

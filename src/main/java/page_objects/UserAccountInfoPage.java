@@ -19,14 +19,14 @@ public class UserAccountInfoPage {
     private final By userNameField = By.xpath("//*[@id=\"name\"]");
     private final By userEmailField = By.xpath("//*[@id=\"email\"]");
     private final By passwordField = By.xpath("//*[@id=\"password\"]");
-    private final By userDayOfBirthDropdownMenu = By.xpath("//*[@id=\"uniform-days\"]");
-    private final By userMonthOfBirthDropdownMenu = By.xpath("//*[@id=\"uniform-months\"]");
-    private final By userYearOfBirthDropdownMenu = By.xpath("//*[@id=\"uniform-years\"]");
+    private final By userDayOfBirthDropdownMenu = By.xpath("//*[@id=\"days\"]");
+    private final By userMonthOfBirthDropdownMenu = By.xpath("//*[@id=\"months\"]");
+    private final By userYearOfBirthDropdownMenu = By.xpath("//*[@id=\"years\"]");
     private final By signupForNewsletterCheckbox = By.xpath("//*[@id=\"newsletter\"]");
     private final By specialOffersCheckbox = By.xpath("//*[@id=\"optin\"]");
     private final By firstNameField = By.xpath("//*[@id=\"first_name\"]");
     private final By lastNameField = By.xpath("//*[@id=\"last_name\"]");
-    private final By addressField = By.xpath("//*[@id=\"address1\"]");
+    private final By addressField1 = By.xpath("//*[@id=\"address1\"]");
     private final By countryDropdownMenu = By.xpath("//*[@id=\"country\"]");
     private final By stateField = By.xpath("//*[@id=\"state\"]");
     private final By cityField = By.xpath("//*[@id=\"city\"]");
@@ -121,12 +121,12 @@ public class UserAccountInfoPage {
         driver.findElement(lastNameField).sendKeys(value);
     }
 
-    public WebElement getAddressField() {
-        return driver.findElement(addressField);
+    public WebElement getAddressField1() {
+        return driver.findElement(addressField1);
     }
 
-    public void setAddressField(String value) {
-        driver.findElement(addressField).sendKeys(value);
+    public void setAddressField1(String value) {
+        driver.findElement(addressField1).sendKeys(value);
     }
 
     public WebElement getCountryDropdownMenu() {

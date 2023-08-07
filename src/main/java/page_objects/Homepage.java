@@ -13,14 +13,26 @@ public class Homepage {
     }
 
     private final By logo = By.cssSelector("img[alt='Website for automation practice']");
-    private final By signUpLogin = By.cssSelector(".nav.navbar-nav > li:nth-of-type(4) > a");
+    private final By signUpLoginLink = By.cssSelector(".nav.navbar-nav > li:nth-of-type(4) > a");
+    private final By loggedInAsUser = By.cssSelector("li:nth-of-type(10) > a");
+    private final By deleteAccountLink = By.cssSelector(".nav.navbar-nav > li:nth-of-type(5) > a");
 
     public WebElement getLogoElement() {
         return driver.findElement(logo);
     }
-
-    public WebElement getSignUpLoginElement() {
-        return driver.findElement(signUpLogin);
+    public void clickOnSignUpLoginLink(){
+        element = driver.findElement(signUpLoginLink);
+        element.click();
     }
+
+    public WebElement getLoggedInAsUser(){
+        return driver.findElement(loggedInAsUser);
+    }
+
+    public void clickOnDeleteAccountLink(){
+        element = driver.findElement(deleteAccountLink);
+        element.click();
+    }
+
 
 }
