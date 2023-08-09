@@ -21,7 +21,8 @@ public class SignupAndLoginPage {
     private final By loginEmailAdressField = By.cssSelector("[action='\\/login'] [type='email']");
     private final By loginPasswordField = By.cssSelector("[type='password']");
     private final By loginButton = By.cssSelector("[action='\\/login'] .btn-default");
-    private final By errorMessage = By.cssSelector(".login-form > form[method='post'] > p");
+    private final By errorMessage1 = By.cssSelector(".login-form > form[method='post'] > p");
+    private final By errorMessage2 = By.cssSelector(".signup-form > form[method='post'] > p");
 
     public WebElement getSignUpTextElement(){
         return driver.findElement(signUpText);
@@ -73,8 +74,8 @@ public class SignupAndLoginPage {
         element.click();
     }
 
-    public WebElement getErrorMessageText() {
-        return driver.findElement(errorMessage);
+    public WebElement getErrorMessageText1() {
+        return driver.findElement(errorMessage1);
     }
 
     public void clearEmailAddressField() {
@@ -85,5 +86,9 @@ public class SignupAndLoginPage {
     public void clearPasswordField() {
         element = driver.findElement(loginPasswordField);
         element.clear();
+    }
+
+    public WebElement getErrorMessageText2() {
+        return driver.findElement(errorMessage2);
     }
 }

@@ -13,7 +13,7 @@ import page_objects.*;
 
 import java.time.Duration;
 
-public class LoginWithValidCredentials {
+public class RegisterUserWithExistingEmail {
     static class Constant {
         private static final String WEBPAGE_URL = "https://automationexercise.com/";
         private static final String USERNAME = "Pete";
@@ -30,6 +30,7 @@ public class LoginWithValidCredentials {
         private static final String CITY = "Montereal";
         private static final String ZIPCODE = "125487";
         private static final String MOBILE_NUMBER = "623479384921304914";
+        private static final String ERROR_MESSAGE2 = "Email Address already exist!";
 
     }
 
@@ -135,8 +136,6 @@ public class LoginWithValidCredentials {
         accountConfirmationPage.clickOnContinueButton();
 
         try {
-            Thread.sleep(5000); // Wait for 5 seconds
-
             wait.until(ExpectedConditions.visibilityOf(homepage.getLoggedInAsUser()));
             if(homepage.getLoggedInAsUser().isDisplayed()) {
                 System.out.println("User is looged in");
@@ -150,6 +149,13 @@ public class LoginWithValidCredentials {
         homepage.clickOnLogoutUserLink();
         System.out.println("User has logout from his profile");
 
+        boolean ad = signupandloginpage.getSignUpTextElement().isDisplayed();
+        if (ad){
+            System.out.println("The title 'New User Signup!' is visible.");
+        } else {
+            System.out.println("The title 'New User Signup!' is NOT visible.");
+        }
+
     }
 
     @Test
@@ -158,14 +164,12 @@ public class LoginWithValidCredentials {
     2. Navigate to url 'http://automationexercise.com'
     3. Verify that home page is visible successfully
     4. Click on 'Signup / Login' button
-    5. Verify 'Login to your account' is visible
-    6. Enter correct email address and password
-    7. Click 'login' button
-    8. Verify that 'Logged in as username' is visible
-    9. Click 'Delete Account' button
-    10. Verify that 'ACCOUNT DELETED!' is visible
+    5. Verify 'New User Signup!' is visible
+    6. Enter name and already registered email address
+    7. Click 'Signup' button
+    8. Verify error 'Email Address already exist!' is visible
     */
-    public void loginUserWithValidCredentialsScenario() {
+    public void registerUserWithExistingEmail() throws InterruptedException {
         driver.get(Constant.WEBPAGE_URL);
         System.out.println("The user is on correct webpage.");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
@@ -173,28 +177,28 @@ public class LoginWithValidCredentials {
         System.out.println("The user is on correct webpage.");
         System.out.println("Clicking on Signup/Login link");
         homepage.clickOnSignUpLoginLink();
-        boolean a = signupandloginpage.getLoginText().isDisplayed();
+        boolean a = signupandloginpage.getSignUpTextElement().isDisplayed();
         if (a){
-            System.out.println("The title 'Login to your account' is visible.");
+            System.out.println("The title 'New User Signup!' is visible.");
         } else {
-            System.out.println("The title 'Login to your account' is NOT visible.");
+            System.out.println("The title 'New User Signup!' is NOT visible.");
         }
 
+        signupandloginpage.getSignUpNameField().sendKeys(Constant.USERNAME);
+        signupandloginpage.getSignUpEmailField().sendKeys(Constant.EMAIL_ADDRESS);
+        signupandloginpage.clickOnSignUpButton();
+        Assert.assertEquals(signupandloginpage.getErrorMessageText2().getText(), Constant.ERROR_MESSAGE2);
+        boolean errorMessage2 = signupandloginpage.getErrorMessageText2().isDisplayed();
+        if(errorMessage2){
+            System.out.println("The error message 'Email Address already exist!' is visible.");
+        }else{
+            System.out.println("The error message 'Email Address already exist!' is NOT visible.");
+        }
+
+        //login in using correct data to delete user from database
         signupandloginpage.getLoginEmailAddressField().sendKeys(Constant.EMAIL_ADDRESS);
         signupandloginpage.getLoginPasswordField().sendKeys(Constant.PASSWORD);
         signupandloginpage.clickOnLoginButton();
-
-        try {
-            wait.until(ExpectedConditions.visibilityOf(homepage.getLoggedInAsUser()));
-            if(homepage.getLoggedInAsUser().isDisplayed()) {
-                System.out.println("User is looged in");
-            } else {
-                System.out.println("User has not been logged in");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         homepage.clickOnDeleteAccountLink();
 
         boolean f = accountDeletePage.getAccountDeleteTitle().isDisplayed();
