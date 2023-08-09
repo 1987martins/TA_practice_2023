@@ -1,6 +1,10 @@
 package signUpandLogin;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -29,7 +33,7 @@ public class RegisterUserTest {
         private static final String STATE = "Upper";
         private static final String CITY = "Montereal";
         private static final String ZIPCODE = "125487";
-        private static final String MOBILE_NUMBER = "623479384921304914";
+        private static final String MOBILE_NUMBER = "629384921304914";
 
     }
 
@@ -44,7 +48,11 @@ public class RegisterUserTest {
     @BeforeMethod(alwaysRun = true)
     public void openTest() {
         System.out.println("Initializing automationexercise.com webpage test");
-        driver = new ChromeDriver();
+        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+        // Create ChromeOptions instance and add the --incognito argument
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--incognito");
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         homepage = new Homepage(driver);
@@ -150,6 +158,8 @@ public class RegisterUserTest {
         accountConfirmationPage.clickOnContinueButton();
 
         try {
+            Thread.sleep(5000); // Wait for 5 seconds
+
             wait.until(ExpectedConditions.visibilityOf(homepage.getLoggedInAsUser()));
             if(homepage.getLoggedInAsUser().isDisplayed()) {
                 System.out.println("User is looged in");

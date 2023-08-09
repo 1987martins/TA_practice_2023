@@ -1,6 +1,7 @@
 package signUpandLogin;
 
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -48,7 +49,11 @@ public class LoginWithInvalidCredentials {
     @BeforeMethod(alwaysRun = true)
     public void openTest() {
         System.out.println("Initializing automationexercise.com webpage test");
-        driver = new ChromeDriver();
+        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+        // Create ChromeOptions instance and add the --incognito argument
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--incognito");
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         homepage = new Homepage(driver);
@@ -59,25 +64,7 @@ public class LoginWithInvalidCredentials {
     }
 
     @Test
-    /*
-    1. Launch browser
-    2. Navigate to url 'http://automationexercise.com'
-    3. Verify that home page is visible successfully
-    4. Click on 'Signup / Login' button
-    5. Verify 'New User Signup!' is visible
-    6. Enter name and email address
-    7. Click 'Signup' button
-    8. Verify that 'ENTER ACCOUNT INFORMATION' is visible
-    9. Fill details: Title, Name, Email, Password, Date of birth
-    10. Select checkbox 'Sign up for our newsletter!'
-    11. Select checkbox 'Receive special offers from our partners!'
-    12. Fill details: First name, Last name, Company, Address, Address2, Country, State, City, Zipcode, Mobile Number
-    13. Click 'Create Account button'
-    14. Verify that 'ACCOUNT CREATED!' is visible
-    15. Click 'Continue' button
-    16. Verify that 'Logged in as username' is visible
-    17. Logout user
-    */
+// Register new user to test next test
     public void registerUserScenario() {
         driver.get(Constant.WEBPAGE_URL);
         System.out.println("The user is on correct webpage.");
@@ -153,6 +140,8 @@ public class LoginWithInvalidCredentials {
         accountConfirmationPage.clickOnContinueButton();
 
         try {
+            Thread.sleep(5000); // Wait for 5 seconds
+
             wait.until(ExpectedConditions.visibilityOf(homepage.getLoggedInAsUser()));
             if(homepage.getLoggedInAsUser().isDisplayed()) {
                 System.out.println("User is looged in");
@@ -195,7 +184,7 @@ public class LoginWithInvalidCredentials {
         signupandloginpage.getLoginEmailAddressField().sendKeys(Constant.EMAIL_ADDRESS);
         signupandloginpage.getLoginPasswordField().sendKeys(Constant.INCORRECT_PASWORD);
         signupandloginpage.clickOnLoginButton();
-        Assert.assertEquals(signupandloginpage.getErrorMessageText().getText(), Constant.ERROR_MESSAGE);
+        Assert.assertEquals(signupandloginpage.getErrorMessageText1().getText(), Constant.ERROR_MESSAGE);
         System.out.println("User cannot log in using INVALID PASSWORD, getting error message");
 
         signupandloginpage.clearEmailAddressField();
@@ -204,7 +193,7 @@ public class LoginWithInvalidCredentials {
         signupandloginpage.getLoginEmailAddressField().sendKeys(Constant.INCORRECT_EMAIL_ADDRESS);
         signupandloginpage.getLoginPasswordField().sendKeys(Constant.PASSWORD);
         signupandloginpage.clickOnLoginButton();
-        Assert.assertEquals(signupandloginpage.getErrorMessageText().getText(), Constant.ERROR_MESSAGE);
+        Assert.assertEquals(signupandloginpage.getErrorMessageText1().getText(), Constant.ERROR_MESSAGE);
         System.out.println("User cannot log in using INVALID EMAIL ADRRESS, getting error message");
 
         signupandloginpage.clearEmailAddressField();
@@ -213,7 +202,7 @@ public class LoginWithInvalidCredentials {
         signupandloginpage.getLoginEmailAddressField().sendKeys(Constant.INCORRECT_EMAIL_ADDRESS);
         signupandloginpage.getLoginPasswordField().sendKeys(Constant.PASSWORD);
         signupandloginpage.clickOnLoginButton();
-        Assert.assertEquals(signupandloginpage.getErrorMessageText().getText(), Constant.ERROR_MESSAGE);
+        Assert.assertEquals(signupandloginpage.getErrorMessageText1().getText(), Constant.ERROR_MESSAGE);
         System.out.println("User cannot log in using INVALID BOTH CREDENTIALS, getting error message");
 
         signupandloginpage.clearEmailAddressField();
