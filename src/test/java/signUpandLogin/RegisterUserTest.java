@@ -1,8 +1,5 @@
 package signUpandLogin;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,7 +15,7 @@ import page_objects.*;
 import java.time.Duration;
 
 public class RegisterUserTest {
-    static class Constant {
+    public static class Constant {
         private static final String WEBPAGE_URL = "https://automationexercise.com/";
         private static final String USERNAME = "Pete";
         private static final String EMAIL_ADDRESS = "936394@mliok.com";

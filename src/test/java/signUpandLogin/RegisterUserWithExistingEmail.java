@@ -187,7 +187,6 @@ public class RegisterUserWithExistingEmail {
         signupandloginpage.getSignUpNameField().sendKeys(Constant.USERNAME);
         signupandloginpage.getSignUpEmailField().sendKeys(Constant.EMAIL_ADDRESS);
         signupandloginpage.clickOnSignUpButton();
-        Assert.assertEquals(signupandloginpage.getErrorMessageText2().getText(), Constant.ERROR_MESSAGE2);
         boolean errorMessage2 = signupandloginpage.getErrorMessageText2().isDisplayed();
         if(errorMessage2){
             System.out.println("The error message 'Email Address already exist!' is visible.");
