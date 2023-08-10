@@ -1,4 +1,4 @@
-package signUpandLogin;
+package signUpandLoginTests;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -13,7 +13,7 @@ import page_objects.*;
 
 import java.time.Duration;
 
-public class LoginWithInvalidCredentials {
+public class RegisterUserWithExistingEmailTest {
     static class Constant {
         private static final String WEBPAGE_URL = "https://automationexercise.com/";
         private static final String USERNAME = "Pete";
@@ -30,12 +30,6 @@ public class LoginWithInvalidCredentials {
         private static final String CITY = "Montereal";
         private static final String ZIPCODE = "125487";
         private static final String MOBILE_NUMBER = "623479384921304914";
-        private static final String INCORRECT_EMAIL_ADDRESS = "email@email.com";
-        private static final String INCORRECT_PASWORD = "pasword";
-        private static final String ERROR_MESSAGE = "Your email or password is incorrect!";
-
-
-
     }
 
     ChromeDriver driver;
@@ -64,7 +58,7 @@ public class LoginWithInvalidCredentials {
     }
 
     @Test
-// Register new user to test next test
+    // Register new user to test next test
     public void registerUserScenario() {
         driver.get(Constant.WEBPAGE_URL);
         System.out.println("The user is on correct webpage.");
@@ -140,8 +134,6 @@ public class LoginWithInvalidCredentials {
         accountConfirmationPage.clickOnContinueButton();
 
         try {
-            Thread.sleep(5000); // Wait for 5 seconds
-
             wait.until(ExpectedConditions.visibilityOf(homepage.getLoggedInAsUser()));
             if(homepage.getLoggedInAsUser().isDisplayed()) {
                 System.out.println("User is looged in");
@@ -155,6 +147,13 @@ public class LoginWithInvalidCredentials {
         homepage.clickOnLogoutUserLink();
         System.out.println("User has logout from his profile");
 
+        boolean ad = signupandloginpage.getSignUpTextElement().isDisplayed();
+        if (ad){
+            System.out.println("The title 'New User Signup!' is visible.");
+        } else {
+            System.out.println("The title 'New User Signup!' is NOT visible.");
+        }
+
     }
 
     @Test
@@ -163,67 +162,40 @@ public class LoginWithInvalidCredentials {
     2. Navigate to url 'http://automationexercise.com'
     3. Verify that home page is visible successfully
     4. Click on 'Signup / Login' button
-    5. Verify 'Login to your account' is visible
-    6. Enter incorrect email address and password
-    7. Click 'login' button
-    8. Verify error 'Your email or password is incorrect!' is visible
+    5. Verify 'New User Signup!' is visible
+    6. Enter name and already registered email address
+    7. Click 'Signup' button
+    8. Verify error 'Email Address already exist!' is visible
     */
-    public void loginUserWithInvalidCredentialsScenario() {
+    public void registerUserWithExistingEmail() {
         driver.get(Constant.WEBPAGE_URL);
         System.out.println("The user is on correct webpage.");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
+        System.out.println("The user is on correct webpage.");
         System.out.println("Clicking on Signup/Login link");
         homepage.clickOnSignUpLoginLink();
-        boolean a = signupandloginpage.getLoginText().isDisplayed();
+        boolean a = signupandloginpage.getSignUpTextElement().isDisplayed();
         if (a){
-            System.out.println("The title 'Login to your account' is visible.");
+            System.out.println("The title 'New User Signup!' is visible.");
         } else {
-            System.out.println("The title 'Login to your account' is NOT visible.");
+            System.out.println("The title 'New User Signup!' is NOT visible.");
         }
-        signupandloginpage.getLoginEmailAddressField().sendKeys(Constant.EMAIL_ADDRESS);
-        signupandloginpage.getLoginPasswordField().sendKeys(Constant.INCORRECT_PASWORD);
-        signupandloginpage.clickOnLoginButton();
-        Assert.assertEquals(signupandloginpage.getErrorMessageText1().getText(), Constant.ERROR_MESSAGE);
-        System.out.println("User cannot log in using INVALID PASSWORD, getting error message");
 
-        signupandloginpage.clearEmailAddressField();
-        signupandloginpage.clearPasswordField();
-
-        signupandloginpage.getLoginEmailAddressField().sendKeys(Constant.INCORRECT_EMAIL_ADDRESS);
-        signupandloginpage.getLoginPasswordField().sendKeys(Constant.PASSWORD);
-        signupandloginpage.clickOnLoginButton();
-        Assert.assertEquals(signupandloginpage.getErrorMessageText1().getText(), Constant.ERROR_MESSAGE);
-        System.out.println("User cannot log in using INVALID EMAIL ADRRESS, getting error message");
-
-        signupandloginpage.clearEmailAddressField();
-        signupandloginpage.clearPasswordField();
-
-        signupandloginpage.getLoginEmailAddressField().sendKeys(Constant.INCORRECT_EMAIL_ADDRESS);
-        signupandloginpage.getLoginPasswordField().sendKeys(Constant.PASSWORD);
-        signupandloginpage.clickOnLoginButton();
-        Assert.assertEquals(signupandloginpage.getErrorMessageText1().getText(), Constant.ERROR_MESSAGE);
-        System.out.println("User cannot log in using INVALID BOTH CREDENTIALS, getting error message");
-
-        signupandloginpage.clearEmailAddressField();
-        signupandloginpage.clearPasswordField();
+        signupandloginpage.getSignUpNameField().sendKeys(Constant.USERNAME);
+        signupandloginpage.getSignUpEmailField().sendKeys(Constant.EMAIL_ADDRESS);
+        signupandloginpage.clickOnSignUpButton();
+        boolean errorMessage2 = signupandloginpage.getErrorMessageText2().isDisplayed();
+        if(errorMessage2){
+            System.out.println("The error message 'Email Address already exist!' is visible.");
+        }else{
+            System.out.println("The error message 'Email Address already exist!' is NOT visible.");
+        }
 
         //login in using correct data to delete user from database
         signupandloginpage.getLoginEmailAddressField().sendKeys(Constant.EMAIL_ADDRESS);
         signupandloginpage.getLoginPasswordField().sendKeys(Constant.PASSWORD);
         signupandloginpage.clickOnLoginButton();
-
-        try {
-            wait.until(ExpectedConditions.visibilityOf(homepage.getLoggedInAsUser()));
-            if(homepage.getLoggedInAsUser().isDisplayed()) {
-                System.out.println("User is looged in");
-            } else {
-                System.out.println("User has not been logged in");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         homepage.clickOnDeleteAccountLink();
 
         boolean f = accountDeletePage.getAccountDeleteTitle().isDisplayed();
