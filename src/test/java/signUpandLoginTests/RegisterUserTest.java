@@ -1,4 +1,4 @@
-package signUpandLogin;
+package signUpandLoginTests;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -13,8 +14,8 @@ import page_objects.*;
 
 import java.time.Duration;
 
-public class LogoutUser {
-    static class Constant {
+public class RegisterUserTest {
+    public static class Constant {
         private static final String WEBPAGE_URL = "https://automationexercise.com/";
         private static final String USERNAME = "Pete";
         private static final String EMAIL_ADDRESS = "936394@mliok.com";
@@ -29,7 +30,7 @@ public class LogoutUser {
         private static final String STATE = "Upper";
         private static final String CITY = "Montereal";
         private static final String ZIPCODE = "125487";
-        private static final String MOBILE_NUMBER = "623479384921304914";
+        private static final String MOBILE_NUMBER = "629384921304914";
 
     }
 
@@ -59,7 +60,26 @@ public class LogoutUser {
     }
 
     @Test
-    // Register new user to test next test
+    /*
+    1. Launch browser
+    2. Navigate to url 'http://automationexercise.com'
+    3. Verify that home page is visible successfully
+    4. Click on 'Signup / Login' button
+    5. Verify 'New User Signup!' is visible
+    6. Enter name and email address
+    7. Click 'Signup' button
+    8. Verify that 'ENTER ACCOUNT INFORMATION' is visible
+    9. Fill details: Title, Name, Email, Password, Date of birth
+    10. Select checkbox 'Sign up for our newsletter!'
+    11. Select checkbox 'Receive special offers from our partners!'
+    12. Fill details: First name, Last name, Company, Address, Address2, Country, State, City, Zipcode, Mobile Number
+    13. Click 'Create Account button'
+    14. Verify that 'ACCOUNT CREATED!' is visible
+    15. Click 'Continue' button
+    16. Verify that 'Logged in as username' is visible
+    17. Click 'Delete Account' button
+    18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
+    */
     public void registerUserScenario() {
         driver.get(Constant.WEBPAGE_URL);
         System.out.println("The user is on correct webpage.");
@@ -147,84 +167,6 @@ public class LogoutUser {
             e.printStackTrace();
         }
 
-        homepage.clickOnLogoutUserLink();
-        System.out.println("User has logout from his profile");
-
-        boolean ad = signupandloginpage.getSignUpTextElement().isDisplayed();
-        if (ad){
-            System.out.println("The title 'New User Signup!' is visible.");
-        } else {
-            System.out.println("The title 'New User Signup!' is NOT visible.");
-        }
-
-    }
-
-    @Test
-    /*
-    1. Launch browser
-    2. Navigate to url 'http://automationexercise.com'
-    3. Verify that home page is visible successfully
-    4. Click on 'Signup / Login' button
-    5. Verify 'Login to your account' is visible
-    6. Enter correct email address and password
-    7. Click 'login' button
-    8. Verify that 'Logged in as username' is visible
-    9. Click 'Logout' button
-    10. Verify that user is navigated to login page
-    */
-    public void userLogoutScenario() throws InterruptedException {
-        driver.get(Constant.WEBPAGE_URL);
-        System.out.println("The user is on correct webpage.");
-        Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
-        wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
-        System.out.println("The user is on correct webpage.");
-        System.out.println("Clicking on Signup/Login link");
-        homepage.clickOnSignUpLoginLink();
-        boolean a = signupandloginpage.getLoginText().isDisplayed();
-        if (a){
-            System.out.println("The title 'Login to your account' is visible.");
-        } else {
-            System.out.println("The title 'Login to your account' is NOT visible.");
-        }
-
-        signupandloginpage.getLoginEmailAddressField().sendKeys(Constant.EMAIL_ADDRESS);
-        signupandloginpage.getLoginPasswordField().sendKeys(Constant.PASSWORD);
-        signupandloginpage.clickOnLoginButton();
-
-        try {
-            wait.until(ExpectedConditions.visibilityOf(homepage.getLoggedInAsUser()));
-            if(homepage.getLoggedInAsUser().isDisplayed()) {
-                System.out.println("User is looged in");
-            } else {
-                System.out.println("User has not been logged in");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        homepage.clickOnLogoutUserLink();
-        System.out.println("User has logout from his profile");
-
-        boolean b = signupandloginpage.getLoginText().isDisplayed();
-        if (b){
-            System.out.println("The title 'Login to your account' is visible.");
-        } else {
-            System.out.println("The title 'Login to your account' is NOT visible.");
-        }
-
-        boolean c = signupandloginpage.getSignUpTextElement().isDisplayed();
-        if (c){
-            System.out.println("The title 'New User Signup!' is visible.");
-        } else {
-            System.out.println("The title 'New User Signup!' is NOT visible.");
-        }
-
-        Thread.sleep(4000);
-
-        //login in using correct data to delete user from database
-        signupandloginpage.getLoginEmailAddressField().sendKeys(Constant.EMAIL_ADDRESS);
-        signupandloginpage.getLoginPasswordField().sendKeys(Constant.PASSWORD);
-        signupandloginpage.clickOnLoginButton();
         homepage.clickOnDeleteAccountLink();
 
         boolean f = accountDeletePage.getAccountDeleteTitle().isDisplayed();
@@ -233,9 +175,10 @@ public class LogoutUser {
         } else {
             System.out.println("The page title 'ACCOUNT DELETED!' NOT VISIBLE ");
         }
+        accountDeletePage.clickOnContinueButton();
     }
 
-    @AfterMethod(alwaysRun = true)
+   @AfterMethod(alwaysRun = true)
     public void tearDownTest() {
        System.out.println("Closing automationexercise.com webpage test");
        driver.close();

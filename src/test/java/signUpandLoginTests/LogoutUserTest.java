@@ -1,4 +1,4 @@
-package signUpandLogin;
+package signUpandLoginTests;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -13,7 +13,7 @@ import page_objects.*;
 
 import java.time.Duration;
 
-public class LoginWithValidCredentials {
+public class LogoutUserTest {
     static class Constant {
         private static final String WEBPAGE_URL = "https://automationexercise.com/";
         private static final String USERNAME = "Pete";
@@ -150,6 +150,13 @@ public class LoginWithValidCredentials {
         homepage.clickOnLogoutUserLink();
         System.out.println("User has logout from his profile");
 
+        boolean ad = signupandloginpage.getSignUpTextElement().isDisplayed();
+        if (ad){
+            System.out.println("The title 'New User Signup!' is visible.");
+        } else {
+            System.out.println("The title 'New User Signup!' is NOT visible.");
+        }
+
     }
 
     @Test
@@ -162,10 +169,10 @@ public class LoginWithValidCredentials {
     6. Enter correct email address and password
     7. Click 'login' button
     8. Verify that 'Logged in as username' is visible
-    9. Click 'Delete Account' button
-    10. Verify that 'ACCOUNT DELETED!' is visible
+    9. Click 'Logout' button
+    10. Verify that user is navigated to login page
     */
-    public void loginUserWithValidCredentialsScenario() {
+    public void userLogoutScenario() throws InterruptedException {
         driver.get(Constant.WEBPAGE_URL);
         System.out.println("The user is on correct webpage.");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
@@ -195,6 +202,29 @@ public class LoginWithValidCredentials {
             e.printStackTrace();
         }
 
+        homepage.clickOnLogoutUserLink();
+        System.out.println("User has logout from his profile");
+
+        boolean b = signupandloginpage.getLoginText().isDisplayed();
+        if (b){
+            System.out.println("The title 'Login to your account' is visible.");
+        } else {
+            System.out.println("The title 'Login to your account' is NOT visible.");
+        }
+
+        boolean c = signupandloginpage.getSignUpTextElement().isDisplayed();
+        if (c){
+            System.out.println("The title 'New User Signup!' is visible.");
+        } else {
+            System.out.println("The title 'New User Signup!' is NOT visible.");
+        }
+
+        Thread.sleep(4000);
+
+        //login in using correct data to delete user from database
+        signupandloginpage.getLoginEmailAddressField().sendKeys(Constant.EMAIL_ADDRESS);
+        signupandloginpage.getLoginPasswordField().sendKeys(Constant.PASSWORD);
+        signupandloginpage.clickOnLoginButton();
         homepage.clickOnDeleteAccountLink();
 
         boolean f = accountDeletePage.getAccountDeleteTitle().isDisplayed();
