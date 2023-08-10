@@ -57,7 +57,7 @@ public class ContactUsFormTest {
     10. Verify success message 'Success! Your details have been submitted successfully.' is visible
     11. Click 'Home' button and verify that landed to home page successfully
      */
-    public void registerUserScenario() throws InterruptedException {
+    public void ContactUsFormScenario() throws InterruptedException {
         driver.get(Constant.WEBPAGE_URL);
         System.out.println("The user is on correct webpage.");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
@@ -94,11 +94,11 @@ public class ContactUsFormTest {
     }
 
 
-//    @AfterMethod(alwaysRun = true)
-//    public void tearDownTest() {
-//        System.out.println("Closing automationexercise.com webpage test");
-//        driver.close();
-//    }
+    @AfterMethod(alwaysRun = true)
+    public void tearDownTest() {
+        System.out.println("Closing automationexercise.com webpage test");
+        driver.close();
+    }
 }
 
 

@@ -168,7 +168,7 @@ public class LoginWithInvalidCredentialsTests {
     7. Click 'login' button
     8. Verify error 'Your email or password is incorrect!' is visible
     */
-    public void loginUserWithInvalidCredentialsScenario() {
+    public void LoginUserWithInvalidCredentialsScenario() {
         driver.get(Constant.WEBPAGE_URL);
         System.out.println("The user is on correct webpage.");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);

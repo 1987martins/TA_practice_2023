@@ -60,7 +60,7 @@ public class LogoutUserTest {
 
     @Test
     // Register new user to test next test
-    public void registerUserScenario() {
+    public void LogoutUserScenario() {
         driver.get(Constant.WEBPAGE_URL);
         System.out.println("The user is on correct webpage.");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);

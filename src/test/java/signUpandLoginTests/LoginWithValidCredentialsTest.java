@@ -165,7 +165,7 @@ public class LoginWithValidCredentialsTest {
     9. Click 'Delete Account' button
     10. Verify that 'ACCOUNT DELETED!' is visible
     */
-    public void loginUserWithValidCredentialsScenario() {
+    public void LoginUserWithValidCredentialsScenario() {
         driver.get(Constant.WEBPAGE_URL);
         System.out.println("The user is on correct webpage.");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
