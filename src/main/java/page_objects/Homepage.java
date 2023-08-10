@@ -18,6 +18,11 @@ public class Homepage {
     private final By deleteAccountLink = By.cssSelector(".nav.navbar-nav > li:nth-of-type(5) > a");
     private final By logoutUserLink  = By.cssSelector(".nav.navbar-nav > li:nth-of-type(4) > a");
     private final By contactUsLink  = By.cssSelector("li:nth-of-type(8) > a");
+    private final By productsLink = By.cssSelector(".nav.navbar-nav > li:nth-of-type(2) > a");
+    private final By homepageSubscriptionField = By.xpath("/html//input[@id='susbscribe_email']");
+    private final By homepageSubscribeButton = By.xpath("/html//button[@id='subscribe']");
+    private final By homepageSubscriptionSuccessMessage = By.cssSelector("div#success-subscribe > .alert.alert-success");
+
 
     public WebElement getLogoElement() {
         return driver.findElement(logo);
@@ -44,6 +49,28 @@ public class Homepage {
     public void clickOnContactUsLink() {
         element = driver.findElement(contactUsLink);
         element.click();
+    }
+
+    public void clickOnProductsLink() {
+        element = driver.findElement(productsLink);
+        element.click();
+    }
+
+    public WebElement getHomepageSubscriptionField() {
+        return driver.findElement(homepageSubscriptionField);
+    }
+
+    public void setHomepageSubscriptionField(String value) {
+        driver.findElement(homepageSubscriptionField).sendKeys(value);
+    }
+
+    public void clickOnHomepageSubscribeButton(){
+        element = driver.findElement(homepageSubscribeButton);
+        element.click();
+    }
+
+    public WebElement getHomepageSubscriptionSusccessMessage(){
+        return driver.findElement(homepageSubscriptionSuccessMessage);
     }
 
 
