@@ -22,6 +22,7 @@ public class Homepage {
     private final By homepageSubscriptionField = By.xpath("/html//input[@id='susbscribe_email']");
     private final By homepageSubscribeButton = By.xpath("/html//button[@id='subscribe']");
     private final By homepageSubscriptionSuccessMessage = By.cssSelector("div#success-subscribe > .alert.alert-success");
+    private final By cartLink = By.cssSelector(".nav.navbar-nav > li:nth-of-type(3) > a");
 
 
     public WebElement getLogoElement() {
@@ -73,5 +74,8 @@ public class Homepage {
         return driver.findElement(homepageSubscriptionSuccessMessage);
     }
 
-
+    public void clickOnCartLink(){
+        element = driver.findElement(cartLink);
+        element.click();
+    }
 }

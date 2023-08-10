@@ -80,7 +80,7 @@ public class RegisterUserTest {
     17. Click 'Delete Account' button
     18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
     */
-    public void registerUserScenario() {
+    public void RegisterUserScenario() {
         driver.get(Constant.WEBPAGE_URL);
         System.out.println("The user is on correct webpage.");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);

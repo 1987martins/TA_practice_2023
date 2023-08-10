@@ -18,6 +18,10 @@ public class ProductsListingPage {
     private final By blueTopViewProductButton = By.cssSelector("[href='\\/product_details\\/1']");
     private final By searchInputField = By.cssSelector("input#search_product");
     private final By searchButton = By.xpath("/html//button[@id='submit_search']");
+    private final By blueTopAddToCartButton = By.cssSelector(".features_items [class='col-sm-4']:nth-child(3) .text-center .add-to-cart");
+    private final By menTshirtAddToCartButton = By.cssSelector(".features_items [class='col-sm-4']:nth-child(4) .text-center .add-to-cart");
+    private final By continueShoppingButton = By.cssSelector(".btn.btn-block.btn-success.close-modal");
+    private final By viewCartLink = By.cssSelector(".modal-confirm.modal-dialog a");
 
     public WebElement getProductsListingPageTitle() {
         return driver.findElement(productsListingPageTitle);
@@ -42,6 +46,26 @@ public class ProductsListingPage {
 
     public void clickOnSearchButton() {
         element = driver.findElement(searchButton);
+        element.click();
+    }
+
+    public void clickOnBlueTopAddToCartButton() {
+        element = driver.findElement(blueTopAddToCartButton);
+        element.click();
+    }
+
+    public void clickOnMenTshirtAddToCartButton() {
+        element = driver.findElement(menTshirtAddToCartButton);
+        element.click();
+    }
+
+    public void clickOnContinueShoppingButton() {
+        element = driver.findElement(continueShoppingButton);
+        element.click();
+    }
+
+    public void clickOnViewCartLink() {
+        element = driver.findElement(viewCartLink);
         element.click();
     }
 }

@@ -1,6 +1,5 @@
 package subscriptionTests;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -10,15 +9,16 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import page_objects.CartPage;
 import page_objects.Homepage;
 
 import java.time.Duration;
 
-public class HomepageSubscriptionTest {
+public class CartSubscriptionTest {
 
     public static class Constant {
         private static final String WEBPAGE_URL = "https://automationexercise.com/";
-        private static final String EMAIL_ADDRESS = "6394@mliok.com";
+        private static final String EMAIL_ADDRESS = "man@mliok.com";
         private static final String SUBSCRIBE_SUCCESS_MESSAGE = "You have been successfully subscribed!";
 
     }
@@ -26,6 +26,7 @@ public class HomepageSubscriptionTest {
     ChromeDriver driver;
     WebDriverWait wait;
     Homepage homepage;
+    CartPage cartpage;
 
 
     @BeforeMethod(alwaysRun = true)
@@ -39,6 +40,7 @@ public class HomepageSubscriptionTest {
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         homepage = new Homepage(driver);
+        cartpage = new CartPage(driver);
 
     }
 
@@ -47,25 +49,29 @@ public class HomepageSubscriptionTest {
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
     3. Verify that home page is visible successfully
-    4. Scroll down to footer
-    5. Verify text 'SUBSCRIPTION'
-    6. Enter email address in input and click arrow button
-    7. Verify success message 'You have been successfully subscribed!' is visible
+    4. Click 'Cart' button
+    5. Scroll down to footer
+    6. Verify text 'SUBSCRIPTION'
+    7. Enter email address in input and click arrow button
+    8. Verify success message 'You have been successfully subscribed!' is visible
      */
-    public void HomepageSubscriptionScenario() throws InterruptedException {
+    public void CartSubscriptionScenario() throws InterruptedException {
         driver.get(Constant.WEBPAGE_URL);
         System.out.println("The user is on correct webpage.");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
 
+        homepage.clickOnCartLink();
+        System.out.println("Opening Cart page");
+
         //Scrolling down to Subscription field
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", homepage.getHomepageSubscriptionField());
-        homepage.getHomepageSubscriptionField().sendKeys(Constant.EMAIL_ADDRESS);
+        cartpage.getCartSubscriptionField().sendKeys(Constant.EMAIL_ADDRESS);
         System.out.println("Populating email address inside Subscription email address field.");
-        homepage.clickOnHomepageSubscribeButton();
+        cartpage.clickOnCartSubscribeButton();
         System.out.println("Clicking on Submit button.");
-        wait.until(ExpectedConditions.visibilityOf(homepage.getHomepageSubscriptionSusccessMessage()));
-        Assert.assertEquals(homepage.getHomepageSubscriptionSusccessMessage().getText(), Constant.SUBSCRIBE_SUCCESS_MESSAGE);
+        wait.until(ExpectedConditions.visibilityOf(cartpage.getCartSubscriptionSuccessMessage()));
+        Assert.assertEquals(cartpage.getCartSubscriptionSuccessMessage().getText(), Constant.SUBSCRIBE_SUCCESS_MESSAGE);
         System.out.println("Subscription success message appeared.");
     }
 

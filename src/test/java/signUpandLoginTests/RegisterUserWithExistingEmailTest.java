@@ -59,7 +59,7 @@ public class RegisterUserWithExistingEmailTest {
 
     @Test
     // Register new user to test next test
-    public void registerUserScenario() {
+    public void RegisterUserWithExistingUserScenario() {
         driver.get(Constant.WEBPAGE_URL);
         System.out.println("The user is on correct webpage.");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);

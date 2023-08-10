@@ -9,29 +9,30 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import page_objects.CartPage;
 import page_objects.Homepage;
-import page_objects.ProductsDetailsPage;
 import page_objects.ProductsListingPage;
-import page_objects.SearchResultPage;
+
 
 import java.time.Duration;
 
-public class SearchProductTest {
+public class AddingTwoProductsToTheCartTest {
 
     static class Constant {
 
         private final static String WEBPAGE_URL = "https://automationexercise.com/";
-        private final static String SEARCH_ITEM_TEXT ="Winter top";
-        private final static String SEARCH_RESULT_ITEMS_TITLE = "Winter Top";
-
+        private final static String PRODUCTS_TITLE_1 = "Blue Top";
+        private final static String PRODUCTS_PRICE_1 = "Rs. 500";
+        private final static String PRODUCTS_TITLE_2 = "Men Tshirt";
+        private final static String PRODUCTS_PRICE_2 = "Rs. 400";
+        private final static String PRODUCTS_QUANTITY_1 ="1";
     }
 
     ChromeDriver driver;
     WebDriverWait wait;
     Homepage homepage;
     ProductsListingPage productslistingpage;
-    ProductsDetailsPage productsdetailspage;
-    SearchResultPage searchresultpage;
+    CartPage cartpage;
     Actions actions;
 
     @BeforeMethod(alwaysRun = true)
@@ -46,8 +47,7 @@ public class SearchProductTest {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         homepage = new Homepage(driver);
         productslistingpage = new ProductsListingPage(driver);
-        productsdetailspage = new ProductsDetailsPage(driver);
-        searchresultpage = new SearchResultPage(driver);
+        cartpage = new CartPage(driver);
         actions = new Actions(driver);
     }
 
@@ -56,13 +56,15 @@ public class SearchProductTest {
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
     3. Verify that home page is visible successfully
-    4. Click on 'Products' button
-    5. Verify user is navigated to ALL PRODUCTS page successfully
-    6. Enter product name in search input and click search button
-    7. Verify 'SEARCHED PRODUCTS' is visible
-    8. Verify all the products related to search are visible
+    4. Click 'Products' button
+    5. Hover over first product and click 'Add to cart'
+    6. Click 'Continue Shopping' button
+    7. Hover over second product and click 'Add to cart'
+    8. Click 'View Cart' button
+    9. Verify both products are added to Cart
+    10. Verify their prices, quantity and total price
     */
-    public void SearchProductScenario() throws InterruptedException {
+    public void VerifyAllProductsAndProductDetailPageScenario() throws InterruptedException {
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         System.out.println("The user is on correct webpage.");
@@ -77,19 +79,31 @@ public class SearchProductTest {
             System.out.println("The products listing page title 'ALL PRODUCTS' is NOT visible.");
         }
 
-        actions.moveToElement(productslistingpage.getSearchInputField()).click().perform();
-        productslistingpage.getSearchInputField().sendKeys(Constant.SEARCH_ITEM_TEXT);
-        productslistingpage.clickOnSearchButton();
+        productslistingpage.clickOnBlueTopAddToCartButton();
+        System.out.println("First product has been added to the cart");
 
-        boolean searchresultpagetitle = searchresultpage.getSearchResultPageTitle().isDisplayed();
-        if(searchresultpagetitle){
-            System.out.println("The search result page title 'SEARCHED PRODUCTS' is visible.");
-        }else{
-            System.out.println("The search result page title 'SEARCHED PRODUCTS' is NOT visible.");
-        }
+        Thread.sleep(2000);
+        productslistingpage.clickOnContinueShoppingButton();
+        System.out.println("Clicking on Continue shopping button");
 
-        Assert.assertNotEquals(searchresultpage.getSearchResultPageProductTitle(), Constant.SEARCH_RESULT_ITEMS_TITLE);
-        System.out.println("Search results are correct");
+        productslistingpage.clickOnMenTshirtAddToCartButton();
+        System.out.println("Second product has been added to the cart.");
+
+        Thread.sleep(2000);
+        productslistingpage.clickOnViewCartLink();
+        System.out.println("Clicking on view cart link.");
+
+        Assert.assertNotEquals(cartpage.getCartBluTopTitle(), Constant.PRODUCTS_TITLE_1);
+        Assert.assertNotEquals(cartpage.getCartMenTshirtTitle(), Constant.PRODUCTS_TITLE_2);
+        System.out.println("Both products have been added to the cart");
+
+        Assert.assertNotEquals(cartpage.getCartBlueTopProductPrice(), Constant.PRODUCTS_PRICE_1);
+        Assert.assertNotEquals(cartpage.getCartBlueTopProductQuantity(), Constant.PRODUCTS_QUANTITY_1);
+        Assert.assertNotEquals(cartpage.getCartBlueTopTotalPrice(), Constant.PRODUCTS_PRICE_1);
+        Assert.assertNotEquals(cartpage.getCartMenTshirtProductPrice(), Constant.PRODUCTS_PRICE_2);
+        Assert.assertNotEquals(cartpage.getCartMenTshirtProductQuantity(), Constant.PRODUCTS_QUANTITY_1);
+        Assert.assertNotEquals(cartpage.getCartMenTshirtTotalPrice(), Constant.PRODUCTS_PRICE_2);
+        System.out.println("All good.");
     }
 
     @AfterMethod(alwaysRun = true)
