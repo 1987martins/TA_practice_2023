@@ -30,13 +30,12 @@ public class LogoutUserTest {
         private static final String CITY = "Montereal";
         private static final String ZIPCODE = "125487";
         private static final String MOBILE_NUMBER = "623479384921304914";
-
     }
 
     ChromeDriver driver;
     WebDriverWait wait;
     Homepage homepage;
-    SignupAndLoginPage signupandloginpage;
+    SignupAndLoginPage signUpAndLoginPage;
     UserAccountInfoPage userAccountInfoPage;
     AccountConfirmationPage accountConfirmationPage;
     AccountDeletePage accountDeletePage;
@@ -52,7 +51,7 @@ public class LogoutUserTest {
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         homepage = new Homepage(driver);
-        signupandloginpage = new SignupAndLoginPage(driver);
+        signUpAndLoginPage = new SignupAndLoginPage(driver);
         userAccountInfoPage = new UserAccountInfoPage(driver);
         accountConfirmationPage = new AccountConfirmationPage(driver);
         accountDeletePage = new AccountDeletePage(driver);
@@ -67,16 +66,16 @@ public class LogoutUserTest {
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
         System.out.println("Clicking on Signup/Login link");
         homepage.clickOnSignUpLoginLink();
-        boolean a = signupandloginpage.getSignUpTextElement().isDisplayed();
+        boolean a = signUpAndLoginPage.getSignUpTextElement().isDisplayed();
         if (a){
             System.out.println("The title 'New User Signup!' is visible.");
         } else {
             System.out.println("The title 'New User Signup!' is NOT visible.");
         }
         System.out.println("Populating mandatory fields");
-        signupandloginpage.getSignUpNameField().sendKeys(Constant.USERNAME);
-        signupandloginpage.getSignUpEmailField().sendKeys(Constant.EMAIL_ADDRESS);
-        signupandloginpage.clickOnSignUpButton();
+        signUpAndLoginPage.getSignUpNameField().sendKeys(Constant.USERNAME);
+        signUpAndLoginPage.getSignUpEmailField().sendKeys(Constant.EMAIL_ADDRESS);
+        signUpAndLoginPage.clickOnSignUpButton();
         boolean b = userAccountInfoPage.getEnterAccountInfoTitle().isDisplayed();
         if (b){
             System.out.println("The title 'ENTER ACCOUNT INFORMATION!' is visible.");
@@ -150,7 +149,7 @@ public class LogoutUserTest {
         homepage.clickOnLogoutUserLink();
         System.out.println("User has logout from his profile");
 
-        boolean ad = signupandloginpage.getSignUpTextElement().isDisplayed();
+        boolean ad = signUpAndLoginPage.getSignUpTextElement().isDisplayed();
         if (ad){
             System.out.println("The title 'New User Signup!' is visible.");
         } else {
@@ -180,16 +179,16 @@ public class LogoutUserTest {
         System.out.println("The user is on correct webpage.");
         System.out.println("Clicking on Signup/Login link");
         homepage.clickOnSignUpLoginLink();
-        boolean a = signupandloginpage.getLoginText().isDisplayed();
+        boolean a = signUpAndLoginPage.getLoginText().isDisplayed();
         if (a){
             System.out.println("The title 'Login to your account' is visible.");
         } else {
             System.out.println("The title 'Login to your account' is NOT visible.");
         }
 
-        signupandloginpage.getLoginEmailAddressField().sendKeys(Constant.EMAIL_ADDRESS);
-        signupandloginpage.getLoginPasswordField().sendKeys(Constant.PASSWORD);
-        signupandloginpage.clickOnLoginButton();
+        signUpAndLoginPage.getLoginEmailAddressField().sendKeys(Constant.EMAIL_ADDRESS);
+        signUpAndLoginPage.getLoginPasswordField().sendKeys(Constant.PASSWORD);
+        signUpAndLoginPage.clickOnLoginButton();
 
         try {
             wait.until(ExpectedConditions.visibilityOf(homepage.getLoggedInAsUser()));
@@ -205,14 +204,14 @@ public class LogoutUserTest {
         homepage.clickOnLogoutUserLink();
         System.out.println("User has logout from his profile");
 
-        boolean b = signupandloginpage.getLoginText().isDisplayed();
+        boolean b = signUpAndLoginPage.getLoginText().isDisplayed();
         if (b){
             System.out.println("The title 'Login to your account' is visible.");
         } else {
             System.out.println("The title 'Login to your account' is NOT visible.");
         }
 
-        boolean c = signupandloginpage.getSignUpTextElement().isDisplayed();
+        boolean c = signUpAndLoginPage.getSignUpTextElement().isDisplayed();
         if (c){
             System.out.println("The title 'New User Signup!' is visible.");
         } else {
@@ -222,9 +221,9 @@ public class LogoutUserTest {
         Thread.sleep(4000);
 
         //login in using correct data to delete user from database
-        signupandloginpage.getLoginEmailAddressField().sendKeys(Constant.EMAIL_ADDRESS);
-        signupandloginpage.getLoginPasswordField().sendKeys(Constant.PASSWORD);
-        signupandloginpage.clickOnLoginButton();
+        signUpAndLoginPage.getLoginEmailAddressField().sendKeys(Constant.EMAIL_ADDRESS);
+        signUpAndLoginPage.getLoginPasswordField().sendKeys(Constant.PASSWORD);
+        signUpAndLoginPage.clickOnLoginButton();
         homepage.clickOnDeleteAccountLink();
 
         boolean f = accountDeletePage.getAccountDeleteTitle().isDisplayed();

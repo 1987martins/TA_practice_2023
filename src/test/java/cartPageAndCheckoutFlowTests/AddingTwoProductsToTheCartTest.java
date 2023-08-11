@@ -1,4 +1,4 @@
-package productsPageAndProductListingPageTests;
+package cartPageAndCheckoutFlowTests;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -31,9 +31,9 @@ public class AddingTwoProductsToTheCartTest {
     ChromeDriver driver;
     WebDriverWait wait;
     Homepage homepage;
-    ProductsListingPage productslistingpage;
-    CartPage cartpage;
-    Actions actions;
+    ProductsListingPage productsListingPage;
+    CartPage cartPage;
+
 
     @BeforeMethod(alwaysRun = true)
     public void openTest() {
@@ -46,9 +46,8 @@ public class AddingTwoProductsToTheCartTest {
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         homepage = new Homepage(driver);
-        productslistingpage = new ProductsListingPage(driver);
-        cartpage = new CartPage(driver);
-        actions = new Actions(driver);
+        productsListingPage = new ProductsListingPage(driver);
+        cartPage = new CartPage(driver);
     }
 
     @Test
@@ -72,37 +71,37 @@ public class AddingTwoProductsToTheCartTest {
 
         homepage.clickOnProductsLink();
         Thread.sleep(5000);
-        boolean productlistingpagetitle = productslistingpage.getProductsListingPageTitle().isDisplayed();
-        if(productlistingpagetitle){
+        boolean productListingPageTitle = productsListingPage.getProductsListingPageTitle().isDisplayed();
+        if(productListingPageTitle){
             System.out.println("The products listing page title 'ALL PRODUCTS' is visible.");
         }else{
             System.out.println("The products listing page title 'ALL PRODUCTS' is NOT visible.");
         }
 
-        productslistingpage.clickOnBlueTopAddToCartButton();
+        productsListingPage.clickOnBlueTopAddToCartButton();
         System.out.println("First product has been added to the cart");
 
         Thread.sleep(2000);
-        productslistingpage.clickOnContinueShoppingButton();
+        productsListingPage.clickOnContinueShoppingButton();
         System.out.println("Clicking on Continue shopping button");
 
-        productslistingpage.clickOnMenTshirtAddToCartButton();
+        productsListingPage.clickOnMenTshirtAddToCartButton();
         System.out.println("Second product has been added to the cart.");
 
         Thread.sleep(2000);
-        productslistingpage.clickOnViewCartLink();
+        productsListingPage.clickOnViewCartLink();
         System.out.println("Clicking on view cart link.");
 
-        Assert.assertNotEquals(cartpage.getCartBluTopTitle(), Constant.PRODUCTS_TITLE_1);
-        Assert.assertNotEquals(cartpage.getCartMenTshirtTitle(), Constant.PRODUCTS_TITLE_2);
+        Assert.assertNotEquals(cartPage.getCartBluTopTitle(), Constant.PRODUCTS_TITLE_1);
+        Assert.assertNotEquals(cartPage.getCartMenTshirtTitle(), Constant.PRODUCTS_TITLE_2);
         System.out.println("Both products have been added to the cart");
 
-        Assert.assertNotEquals(cartpage.getCartBlueTopProductPrice(), Constant.PRODUCTS_PRICE_1);
-        Assert.assertNotEquals(cartpage.getCartBlueTopProductQuantity(), Constant.PRODUCTS_QUANTITY_1);
-        Assert.assertNotEquals(cartpage.getCartBlueTopTotalPrice(), Constant.PRODUCTS_PRICE_1);
-        Assert.assertNotEquals(cartpage.getCartMenTshirtProductPrice(), Constant.PRODUCTS_PRICE_2);
-        Assert.assertNotEquals(cartpage.getCartMenTshirtProductQuantity(), Constant.PRODUCTS_QUANTITY_1);
-        Assert.assertNotEquals(cartpage.getCartMenTshirtTotalPrice(), Constant.PRODUCTS_PRICE_2);
+        Assert.assertNotEquals(cartPage.getCartBlueTopProductPrice(), Constant.PRODUCTS_PRICE_1);
+        Assert.assertNotEquals(cartPage.getCartBlueTopProductQuantity(), Constant.PRODUCTS_QUANTITY_1);
+        Assert.assertNotEquals(cartPage.getCartBlueTopTotalPrice(), Constant.PRODUCTS_PRICE_1);
+        Assert.assertNotEquals(cartPage.getCartMenTshirtProductPrice(), Constant.PRODUCTS_PRICE_2);
+        Assert.assertNotEquals(cartPage.getCartMenTshirtProductQuantity(), Constant.PRODUCTS_QUANTITY_1);
+        Assert.assertNotEquals(cartPage.getCartMenTshirtTotalPrice(), Constant.PRODUCTS_PRICE_2);
         System.out.println("All good.");
     }
 

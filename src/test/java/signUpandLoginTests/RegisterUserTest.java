@@ -31,13 +31,12 @@ public class RegisterUserTest {
         private static final String CITY = "Montereal";
         private static final String ZIPCODE = "125487";
         private static final String MOBILE_NUMBER = "629384921304914";
-
     }
 
     ChromeDriver driver;
     WebDriverWait wait;
     Homepage homepage;
-    SignupAndLoginPage signupandloginpage;
+    SignupAndLoginPage signUpAndLoginPage;
     UserAccountInfoPage userAccountInfoPage;
     AccountConfirmationPage accountConfirmationPage;
     AccountDeletePage accountDeletePage;
@@ -53,7 +52,7 @@ public class RegisterUserTest {
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         homepage = new Homepage(driver);
-        signupandloginpage = new SignupAndLoginPage(driver);
+        signUpAndLoginPage = new SignupAndLoginPage(driver);
         userAccountInfoPage = new UserAccountInfoPage(driver);
         accountConfirmationPage = new AccountConfirmationPage(driver);
         accountDeletePage = new AccountDeletePage(driver);
@@ -87,16 +86,16 @@ public class RegisterUserTest {
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
         System.out.println("Clicking on Signup/Login link");
         homepage.clickOnSignUpLoginLink();
-        boolean a = signupandloginpage.getSignUpTextElement().isDisplayed();
+        boolean a = signUpAndLoginPage.getSignUpTextElement().isDisplayed();
         if (a){
             System.out.println("The title 'New User Signup!' is visible.");
         } else {
             System.out.println("The title 'New User Signup!' is NOT visible.");
         }
         System.out.println("Populating mandatory fields");
-        signupandloginpage.getSignUpNameField().sendKeys(Constant.USERNAME);
-        signupandloginpage.getSignUpEmailField().sendKeys(Constant.EMAIL_ADDRESS);
-        signupandloginpage.clickOnSignUpButton();
+        signUpAndLoginPage.getSignUpNameField().sendKeys(Constant.USERNAME);
+        signUpAndLoginPage.getSignUpEmailField().sendKeys(Constant.EMAIL_ADDRESS);
+        signUpAndLoginPage.clickOnSignUpButton();
         boolean b = userAccountInfoPage.getEnterAccountInfoTitle().isDisplayed();
         if (b){
             System.out.println("The title 'ENTER ACCOUNT INFORMATION!' is visible.");

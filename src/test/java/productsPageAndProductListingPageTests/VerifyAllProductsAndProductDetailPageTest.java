@@ -31,8 +31,8 @@ public class VerifyAllProductsAndProductDetailPageTest {
     ChromeDriver driver;
     WebDriverWait wait;
     Homepage homepage;
-    ProductsListingPage productslistingpage;
-    ProductsDetailsPage productsdetailspage;
+    ProductsListingPage productsListingPage;
+    ProductsDetailsPage productsDetailsPage;
 
     @BeforeMethod(alwaysRun = true)
     public void openTest() {
@@ -45,8 +45,8 @@ public class VerifyAllProductsAndProductDetailPageTest {
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         homepage = new Homepage(driver);
-        productslistingpage = new ProductsListingPage(driver);
-        productsdetailspage = new ProductsDetailsPage(driver);
+        productsListingPage = new ProductsListingPage(driver);
+        productsDetailsPage = new ProductsDetailsPage(driver);
     }
 
     @Test
@@ -69,32 +69,32 @@ public class VerifyAllProductsAndProductDetailPageTest {
 
         homepage.clickOnProductsLink();
         Thread.sleep(5000);
-        boolean productlistingpagetitle = productslistingpage.getProductsListingPageTitle().isDisplayed();
+        boolean productlistingpagetitle = productsListingPage.getProductsListingPageTitle().isDisplayed();
         if(productlistingpagetitle){
             System.out.println("The products listing page title 'ALL PRODUCTS' is visible.");
         }else{
             System.out.println("The products listing page title 'ALL PRODUCTS' is NOT visible.");
         }
 
-        boolean productslist = productslistingpage.getProductsList().isDisplayed();
+        boolean productslist = productsListingPage.getProductsList().isDisplayed();
         if(productslist) {
             System.out.println("Product list is Displayed");
         } else {
             System.out.println("Products list is NOT Displayed");
         }
 
-        productslistingpage.clickOnBlueTopViewProductButton();
+        productsListingPage.clickOnBlueTopViewProductButton();
         System.out.println("User click one 'View Product' button to view products detail page.");
         Thread.sleep(5000);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.PRODUCTS_DETAILS_PAGE_1_URL);
         System.out.println("User has landed on first  products detail page");
 
-        Assert.assertNotEquals(productsdetailspage.getListingPageProductsName(), Constant.PRODUCTS_TITLE_1);
-        Assert.assertNotEquals(productsdetailspage.getListingPageProductsCategory(), Constant.PRODUCTS_CATEGORY_1);
-        Assert.assertNotEquals(productsdetailspage.getListingPageProductsPrice(), Constant.PRODUCTS_PRICE_1);
-        Assert.assertNotEquals(productsdetailspage.getListingPageProductsAvailability(), Constant.PRODUCTS_AVAILABILITY_1);
-        Assert.assertNotEquals(productsdetailspage.getListingPageProductsCondition(), Constant.PRODUCTS_CONDITIONS_1);
-        Assert.assertNotEquals(productsdetailspage.getListingPageProductsBrand(), Constant.PRODUCTS_BRAND_1);
+        Assert.assertNotEquals(productsDetailsPage.getDetailPageProductsName(), Constant.PRODUCTS_TITLE_1);
+        Assert.assertNotEquals(productsDetailsPage.getDetailPageProductsCategory(), Constant.PRODUCTS_CATEGORY_1);
+        Assert.assertNotEquals(productsDetailsPage.getDetailPageProductsPrice(), Constant.PRODUCTS_PRICE_1);
+        Assert.assertNotEquals(productsDetailsPage.getDetailPageProductsAvailability(), Constant.PRODUCTS_AVAILABILITY_1);
+        Assert.assertNotEquals(productsDetailsPage.getDetailPageProductsCondition(), Constant.PRODUCTS_CONDITIONS_1);
+        Assert.assertNotEquals(productsDetailsPage.getDetailPageProductsBrand(), Constant.PRODUCTS_BRAND_1);
         System.out.println("All product details are visible");
     }
 

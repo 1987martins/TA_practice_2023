@@ -12,34 +12,62 @@ public class ProductsDetailsPage {
         this.driver = driver;
     }
 
-    private final By listingPageProductsName = By.cssSelector(".product-information > h2");
-    private final By listingPageProductsCategory = By.cssSelector(".product-information p:nth-child(3)");
-    private final By listingPageProductPrice = By.cssSelector(".product-information span:nth-child(5) span");
-    private final By listingPageProductsAvailability = By.cssSelector(".product-information p:nth-child(6)");
-    private final By listingPageProductsCondition = By.cssSelector(".product-information p:nth-child(7)");
-    private final By listingPageProductsBrand = By.cssSelector(".product-information p:nth-child(8)");
+    private final By detailPageProductsName = By.cssSelector(".product-information > h2");
+    private final By detailPageProductsCategory = By.cssSelector(".product-information p:nth-child(3)");
+    private final By detailPageProductPrice = By.cssSelector(".product-information span:nth-child(5) span");
+    private final By detailPageProductsAvailability = By.cssSelector(".product-information p:nth-child(6)");
+    private final By detailPageProductsCondition = By.cssSelector(".product-information p:nth-child(7)");
+    private final By detailPageProductsBrand = By.cssSelector(".product-information p:nth-child(8)");
+    private final By detailPageProductsQuantity = By.xpath("/html//input[@id='quantity']");
+    private final By detailPageAddToCartButton = By.cssSelector(".btn.btn-default.cart");
+    private final By detailPageViewCartLink = By.cssSelector(".modal-confirm.modal-dialog a");
 
-    public WebElement getListingPageProductsName() {
-        return driver.findElement(listingPageProductsName);
+
+    public WebElement getDetailPageProductsName() {
+        return driver.findElement(detailPageProductsName);
     }
 
-    public WebElement getListingPageProductsCategory() {
-        return driver.findElement(listingPageProductsCategory);
+    public WebElement getDetailPageProductsCategory() {
+        return driver.findElement(detailPageProductsCategory);
     }
 
-    public WebElement getListingPageProductsPrice() {
-        return driver.findElement(listingPageProductPrice);
+    public WebElement getDetailPageProductsPrice() {
+        return driver.findElement(detailPageProductPrice);
     }
 
-    public WebElement getListingPageProductsAvailability() {
-        return driver.findElement(listingPageProductsAvailability);
+    public WebElement getDetailPageProductsAvailability() {
+        return driver.findElement(detailPageProductsAvailability);
     }
 
-    public WebElement getListingPageProductsCondition() {
-        return driver.findElement(listingPageProductsCondition);
+    public WebElement getDetailPageProductsCondition() {
+        return driver.findElement(detailPageProductsCondition);
     }
 
-    public WebElement getListingPageProductsBrand() {
-        return driver.findElement(listingPageProductsBrand);
+    public WebElement getDetailPageProductsBrand() {
+        return driver.findElement(detailPageProductsBrand);
     }
+
+    public WebElement getDetailPageProductsQuantity() {
+        return driver.findElement(detailPageProductsQuantity);
+    }
+
+    public void setDetailPageProductsQuantity(String value) {
+        driver.findElement(detailPageProductsQuantity).sendKeys(value);
+    }
+
+    public void clearDetailPageProductsQuantity() {
+        element = driver.findElement(detailPageProductsQuantity);
+        element.clear();
+    }
+
+    public void clickOnDetailPageAddToCartButton() {
+        element = driver.findElement(detailPageAddToCartButton);
+        element.click();
+    }
+
+    public void clickOnDetailPageViewCartLink() {
+        element = driver.findElement(detailPageViewCartLink);
+        element.click();
+    }
+
 }

@@ -24,6 +24,9 @@ public class CartPage {
     private final By cartMenTshirtProductPrice = By.cssSelector("tr:nth-of-type(2) > .cart_price > p");
     private final By cartMenTshirtTotalPrice = By.cssSelector("tr:nth-of-type(2)  .cart_total_price");
     private final By cartMenTshirtProductQuantity = By.cssSelector("tbody tr:nth-of-type(2) button");
+    private final By cartSleevelessDressTitle = By.cssSelector("[href='\\/product_details\\/3']");
+    private final By getCartSleevelessDressQuantity = By.cssSelector("tr#product-3 > .cart_quantity");
+
 
     public WebElement getCartSubscriptionField() {
         return driver.findElement(cartSubscriptionField);
@@ -72,5 +75,13 @@ public class CartPage {
 
     public WebElement getCartMenTshirtTotalPrice() {
         return driver.findElement(cartMenTshirtTotalPrice);
+    }
+
+    public WebElement getCartSleevelessDressTitle() {
+        return driver.findElement(cartSleevelessDressTitle);
+    }
+
+    public WebElement getCartSleevelessDressQuantity() {
+        return driver.findElement(getCartSleevelessDressQuantity);
     }
 }
