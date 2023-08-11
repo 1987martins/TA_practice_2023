@@ -20,7 +20,6 @@ public class HomepageSubscriptionTest {
         private static final String WEBPAGE_URL = "https://automationexercise.com/";
         private static final String EMAIL_ADDRESS = "6394@mliok.com";
         private static final String SUBSCRIBE_SUCCESS_MESSAGE = "You have been successfully subscribed!";
-
     }
 
     ChromeDriver driver;
@@ -39,7 +38,6 @@ public class HomepageSubscriptionTest {
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         homepage = new Homepage(driver);
-
     }
 
     @Test

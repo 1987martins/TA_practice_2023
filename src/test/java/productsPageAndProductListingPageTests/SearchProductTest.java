@@ -23,15 +23,13 @@ public class SearchProductTest {
         private final static String WEBPAGE_URL = "https://automationexercise.com/";
         private final static String SEARCH_ITEM_TEXT ="Winter top";
         private final static String SEARCH_RESULT_ITEMS_TITLE = "Winter Top";
-
     }
 
     ChromeDriver driver;
     WebDriverWait wait;
     Homepage homepage;
-    ProductsListingPage productslistingpage;
-    ProductsDetailsPage productsdetailspage;
-    SearchResultPage searchresultpage;
+    ProductsListingPage productsListingPage;
+    SearchResultPage searchResultPage;
     Actions actions;
 
     @BeforeMethod(alwaysRun = true)
@@ -45,9 +43,8 @@ public class SearchProductTest {
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         homepage = new Homepage(driver);
-        productslistingpage = new ProductsListingPage(driver);
-        productsdetailspage = new ProductsDetailsPage(driver);
-        searchresultpage = new SearchResultPage(driver);
+        productsListingPage= new ProductsListingPage(driver);
+        searchResultPage = new SearchResultPage(driver);
         actions = new Actions(driver);
     }
 
@@ -70,25 +67,25 @@ public class SearchProductTest {
 
         homepage.clickOnProductsLink();
         Thread.sleep(5000);
-        boolean productlistingpagetitle = productslistingpage.getProductsListingPageTitle().isDisplayed();
+        boolean productlistingpagetitle = productsListingPage.getProductsListingPageTitle().isDisplayed();
         if(productlistingpagetitle){
             System.out.println("The products listing page title 'ALL PRODUCTS' is visible.");
         }else{
             System.out.println("The products listing page title 'ALL PRODUCTS' is NOT visible.");
         }
 
-        actions.moveToElement(productslistingpage.getSearchInputField()).click().perform();
-        productslistingpage.getSearchInputField().sendKeys(Constant.SEARCH_ITEM_TEXT);
-        productslistingpage.clickOnSearchButton();
+        actions.moveToElement(productsListingPage.getSearchInputField()).click().perform();
+        productsListingPage.getSearchInputField().sendKeys(Constant.SEARCH_ITEM_TEXT);
+        productsListingPage.clickOnSearchButton();
 
-        boolean searchresultpagetitle = searchresultpage.getSearchResultPageTitle().isDisplayed();
+        boolean searchresultpagetitle = searchResultPage.getSearchResultPageTitle().isDisplayed();
         if(searchresultpagetitle){
             System.out.println("The search result page title 'SEARCHED PRODUCTS' is visible.");
         }else{
             System.out.println("The search result page title 'SEARCHED PRODUCTS' is NOT visible.");
         }
 
-        Assert.assertNotEquals(searchresultpage.getSearchResultPageProductTitle(), Constant.SEARCH_RESULT_ITEMS_TITLE);
+        Assert.assertNotEquals(searchResultPage.getSearchResultPageProductTitle(), Constant.SEARCH_RESULT_ITEMS_TITLE);
         System.out.println("Search results are correct");
     }
 

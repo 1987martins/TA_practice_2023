@@ -20,13 +20,12 @@ public class CartSubscriptionTest {
         private static final String WEBPAGE_URL = "https://automationexercise.com/";
         private static final String EMAIL_ADDRESS = "man@mliok.com";
         private static final String SUBSCRIBE_SUCCESS_MESSAGE = "You have been successfully subscribed!";
-
     }
 
     ChromeDriver driver;
     WebDriverWait wait;
     Homepage homepage;
-    CartPage cartpage;
+    CartPage cartPage;
 
 
     @BeforeMethod(alwaysRun = true)
@@ -40,8 +39,7 @@ public class CartSubscriptionTest {
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         homepage = new Homepage(driver);
-        cartpage = new CartPage(driver);
-
+        cartPage = new CartPage(driver);
     }
 
     @Test
@@ -66,12 +64,12 @@ public class CartSubscriptionTest {
 
         //Scrolling down to Subscription field
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", homepage.getHomepageSubscriptionField());
-        cartpage.getCartSubscriptionField().sendKeys(Constant.EMAIL_ADDRESS);
+        cartPage .getCartSubscriptionField().sendKeys(Constant.EMAIL_ADDRESS);
         System.out.println("Populating email address inside Subscription email address field.");
-        cartpage.clickOnCartSubscribeButton();
+        cartPage .clickOnCartSubscribeButton();
         System.out.println("Clicking on Submit button.");
-        wait.until(ExpectedConditions.visibilityOf(cartpage.getCartSubscriptionSuccessMessage()));
-        Assert.assertEquals(cartpage.getCartSubscriptionSuccessMessage().getText(), Constant.SUBSCRIBE_SUCCESS_MESSAGE);
+        wait.until(ExpectedConditions.visibilityOf(cartPage .getCartSubscriptionSuccessMessage()));
+        Assert.assertEquals(cartPage .getCartSubscriptionSuccessMessage().getText(), Constant.SUBSCRIBE_SUCCESS_MESSAGE);
         System.out.println("Subscription success message appeared.");
     }
 

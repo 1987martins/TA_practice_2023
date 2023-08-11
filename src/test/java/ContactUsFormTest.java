@@ -25,7 +25,7 @@ public class ContactUsFormTest {
     ChromeDriver driver;
     WebDriverWait wait;
     Homepage homepage;
-    ContactUsForm contactusform;
+    ContactUsForm contactUsForm;
     Alert alert;
 
 
@@ -40,7 +40,7 @@ public class ContactUsFormTest {
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         homepage = new Homepage(driver);
-        contactusform = new ContactUsForm(driver);
+        contactUsForm = new ContactUsForm(driver);
     }
 
     @Test
@@ -64,31 +64,31 @@ public class ContactUsFormTest {
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
         homepage.clickOnContactUsLink();
 
-        boolean a = contactusform.getContactUsTitle().isDisplayed();
+        boolean a = contactUsForm.getContactUsTitle().isDisplayed();
         if (a){
             System.out.println("The title 'GET IN TOUCH' is visible.");
         } else {
             System.out.println("The title 'GET IN TOUCH' is NOT visible.");
         }
         System.out.println("Populating all contact us form fields with data.");
-        contactusform.getContactUsNameField().sendKeys(Constant.USERNAME);
-        contactusform.getContactUsEmailField().sendKeys(Constant.EMAIL_ADDRESS);
-        contactusform.getContactUsSubjectField().sendKeys(Constant.CONTACT_US_SUBJECT);
-        contactusform.getContactUsMessageField().sendKeys(Constant.CONTACT_US_MESSAGE);
-        contactusform.getContactUsChooseFileButton().sendKeys(Constant.PATH_TO_FILE);
-        contactusform.clickOnContactUsSubmitButton();
+        contactUsForm.getContactUsNameField().sendKeys(Constant.USERNAME);
+        contactUsForm.getContactUsEmailField().sendKeys(Constant.EMAIL_ADDRESS);
+        contactUsForm.getContactUsSubjectField().sendKeys(Constant.CONTACT_US_SUBJECT);
+        contactUsForm.getContactUsMessageField().sendKeys(Constant.CONTACT_US_MESSAGE);
+        contactUsForm.getContactUsChooseFileButton().sendKeys(Constant.PATH_TO_FILE);
+        contactUsForm.clickOnContactUsSubmitButton();
         Thread.sleep(2000);
         System.out.println("Accepting alert pop window");
         alert=driver.switchTo().alert();
         alert.accept();
 
-        boolean contactusuccessmessage = contactusform.getContactUsSuccessMessage().isDisplayed();
+        boolean contactusuccessmessage = contactUsForm.getContactUsSuccessMessage().isDisplayed();
         if(contactusuccessmessage){
             System.out.println("The error message 'Success! Your details have been submitted successfully.' is visible.");
         }else{
             System.out.println("The error message 'Success! Your details have been submitted successfully.' is NOT visible.");
         }
-        contactusform.clickOnContactUsHomeButton();
+        contactUsForm.clickOnContactUsHomeButton();
         System.out.println("User is on homepage");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
     }
