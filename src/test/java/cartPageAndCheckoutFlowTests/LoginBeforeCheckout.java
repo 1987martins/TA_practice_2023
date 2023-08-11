@@ -1,5 +1,6 @@
-package signUpandLoginTests;
+package cartPageAndCheckoutFlowTests;
 
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,11 +14,15 @@ import page_objects.*;
 
 import java.time.Duration;
 
-public class LoginWithInvalidCredentialsTests {
+public class LoginBeforeCheckout {
+
     static class Constant {
-        private static final String WEBPAGE_URL = "https://automationexercise.com/";
+
+        private final static String WEBPAGE_URL = "https://automationexercise.com/";
+        private final static String WEBPAGE_URL_FOR_PDP_3 = "https://automationexercise.com/product_details/3";
+        private final static String CART_URL = "https://automationexercise.com/view_cart";
         private static final String USERNAME = "Pete";
-        private static final String EMAIL_ADDRESS = "936394@mliok.com";
+        private static final String EMAIL_ADDRESS = "2953@mliok.com";
         private static final String PASSWORD = "123@derek@";
         private static final String DAY_OF_BIRTH = "20";
         private static final String MONTH_OF_BIRTH = "May";
@@ -29,19 +34,29 @@ public class LoginWithInvalidCredentialsTests {
         private static final String STATE = "Upper";
         private static final String CITY = "Montereal";
         private static final String ZIPCODE = "125487";
-        private static final String MOBILE_NUMBER = "623479384921304914";
-        private static final String INCORRECT_EMAIL_ADDRESS = "email@email.com";
-        private static final String INCORRECT_PASWORD = "pasword";
-        private static final String ERROR_MESSAGE = "Your email or password is incorrect!";
+        private static final String MOBILE_NUMBER = "629384921304914";
+        private final static String PRODUCTS_TITLE_2 = "Men Tshirt";
+        private final static String COMMENT_ABOUT_ORDER = "Cannot wait to wear it.";
+        public final static String NAME_OF_CARD = "Peter Crown";
+        public final static String CARD_NUMBER = "4111 1111 1111 1111";
+        public final static String CVC_NUMBER = "308";
+        public final static String MONTH_OF_EXPIRATION = "06";
+        public final static String YEAR_OF_EXPIRATION = "2030";
+        public final static String ORDER_SUCCESS_MESSAGE = "Congratulations! Your order has been confirmed!";
     }
 
     ChromeDriver driver;
     WebDriverWait wait;
     Homepage homepage;
+    CartPage cartPage;
     SignupAndLoginPage signUpAndLoginPage;
     UserAccountInfoPage userAccountInfoPage;
     AccountConfirmationPage accountConfirmationPage;
+    CheckoutPage checkoutPage;
+    PaymentPage paymentPage;
     AccountDeletePage accountDeletePage;
+    OrderConfirmPage orderConfirmPage;
+
 
     @BeforeMethod(alwaysRun = true)
     public void openTest() {
@@ -54,15 +69,19 @@ public class LoginWithInvalidCredentialsTests {
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         homepage = new Homepage(driver);
+        cartPage = new CartPage(driver);
         signUpAndLoginPage = new SignupAndLoginPage(driver);
         userAccountInfoPage = new UserAccountInfoPage(driver);
         accountConfirmationPage = new AccountConfirmationPage(driver);
+        checkoutPage = new CheckoutPage(driver);
+        paymentPage = new PaymentPage(driver);
         accountDeletePage = new AccountDeletePage(driver);
+        orderConfirmPage = new OrderConfirmPage(driver);
+
     }
 
     @Test
-// Register new user to test next test
-    public void registerUserForNextTestScenario() {
+    public void RegisterUserBeforeNextTestScenario() {
         System.out.println("Creating User data for next test");
         driver.get(Constant.WEBPAGE_URL);
         System.out.println("The user is on correct webpage.");
@@ -149,9 +168,9 @@ public class LoginWithInvalidCredentialsTests {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         homepage.clickOnLogoutUserLink();
         System.out.println("User has logout from his profile");
+        System.out.println("User data has been created for next test");
     }
 
     @Test
@@ -159,18 +178,27 @@ public class LoginWithInvalidCredentialsTests {
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
     3. Verify that home page is visible successfully
-    4. Click on 'Signup / Login' button
-    5. Verify 'Login to your account' is visible
-    6. Enter incorrect email address and password
-    7. Click 'login' button
-    8. Verify error 'Your email or password is incorrect!' is visible
+    4. Click 'Signup / Login' button
+    5. Fill email, password and click 'Login' button
+    6. Verify 'Logged in as username' at top
+    7. Add products to cart
+    8. Click 'Cart' button
+    9. Verify that cart page is displayed
+    10. Click Proceed To Checkout
+    11. Verify Address Details and Review Your Order
+    12. Enter description in comment text area and click 'Place Order'
+    13. Enter payment details: Name on Card, Card Number, CVC, Expiration date
+    14. Click 'Pay and Confirm Order' button
+    15. Verify success message 'Your order has been placed successfully!'
+    16. Click 'Delete Account' button
+    17. Verify 'ACCOUNT DELETED!' and click 'Continue' button
     */
-    public void LoginUserWithInvalidCredentialsScenario() {
+    public void LoginBeforeCheckoutScenario() throws InterruptedException {
         driver.get(Constant.WEBPAGE_URL);
-        System.out.println("The user is on correct webpage.");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
+        System.out.println("The user is on correct webpage.");
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
-        System.out.println("Clicking on Signup/Login link");
+
         homepage.clickOnSignUpLoginLink();
         boolean a = signUpAndLoginPage.getLoginText().isDisplayed();
         if (a){
@@ -178,34 +206,7 @@ public class LoginWithInvalidCredentialsTests {
         } else {
             System.out.println("The title 'Login to your account' is NOT visible.");
         }
-        signUpAndLoginPage.getLoginEmailAddressField().sendKeys(Constant.EMAIL_ADDRESS);
-        signUpAndLoginPage.getLoginPasswordField().sendKeys(Constant.INCORRECT_PASWORD);
-        signUpAndLoginPage.clickOnLoginButton();
-        Assert.assertEquals(signUpAndLoginPage.getErrorMessageText1().getText(), Constant.ERROR_MESSAGE);
-        System.out.println("User cannot log in using INVALID PASSWORD, getting error message");
 
-        signUpAndLoginPage.clearEmailAddressField();
-        signUpAndLoginPage.clearPasswordField();
-
-        signUpAndLoginPage.getLoginEmailAddressField().sendKeys(Constant.INCORRECT_EMAIL_ADDRESS);
-        signUpAndLoginPage.getLoginPasswordField().sendKeys(Constant.PASSWORD);
-        signUpAndLoginPage.clickOnLoginButton();
-        Assert.assertEquals(signUpAndLoginPage.getErrorMessageText1().getText(), Constant.ERROR_MESSAGE);
-        System.out.println("User cannot log in using INVALID EMAIL ADRRESS, getting error message");
-
-        signUpAndLoginPage.clearEmailAddressField();
-        signUpAndLoginPage.clearPasswordField();
-
-        signUpAndLoginPage.getLoginEmailAddressField().sendKeys(Constant.INCORRECT_EMAIL_ADDRESS);
-        signUpAndLoginPage.getLoginPasswordField().sendKeys(Constant.PASSWORD);
-        signUpAndLoginPage.clickOnLoginButton();
-        Assert.assertEquals(signUpAndLoginPage.getErrorMessageText1().getText(), Constant.ERROR_MESSAGE);
-        System.out.println("User cannot log in using INVALID BOTH CREDENTIALS, getting error message");
-
-        signUpAndLoginPage.clearEmailAddressField();
-        signUpAndLoginPage.clearPasswordField();
-
-        //login in using correct data to delete user from database
         signUpAndLoginPage.getLoginEmailAddressField().sendKeys(Constant.EMAIL_ADDRESS);
         signUpAndLoginPage.getLoginPasswordField().sendKeys(Constant.PASSWORD);
         signUpAndLoginPage.clickOnLoginButton();
@@ -220,6 +221,74 @@ public class LoginWithInvalidCredentialsTests {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+        homepage.clickOnHomepageMenTshirtAddToCartButton();
+        System.out.println("Adding product to the cart");
+
+        wait.until(ExpectedConditions.visibilityOf(homepage.getHomepageViewCartLink()));
+        homepage.clickOnHomepageViewCartLink();
+        Assert.assertEquals(driver.getCurrentUrl(), Constant.CART_URL);
+        System.out.println("User has landed on the Cart page");
+
+        cartPage.clickOnCartProceedToCheckout();
+
+        System.out.println("Verifying Delivery and Invoice Addresses.");
+        WebElement deliveryAddressElement = checkoutPage.getDeliveryAddressField();
+        String deliveryAddress = deliveryAddressElement.getText();
+        String[] deliveryAddressLines = deliveryAddress.split("\n");
+        String deliveryName = deliveryAddressLines[1];
+        String deliveryStreet = deliveryAddressLines[2];
+        String deliveryCityZip = deliveryAddressLines[3];
+        String deliveryCountry = deliveryAddressLines[4];
+        String deliveryPhone = deliveryAddressLines[5];
+
+        if (Constant.FIRST_NAME.contains(deliveryName) ||
+                Constant.ADDRESS_1.contains(deliveryStreet) ||
+                Constant.CITY.contains(deliveryCityZip) ||
+                Constant.COUNTRY.contains(deliveryCountry) ||
+                Constant.MOBILE_NUMBER.contains(deliveryPhone)) {
+            System.out.println("Delivery address matches account information.");
+        } else {
+            System.out.println("Delivery address does not match account information.");
+        }
+
+        WebElement invoiceAddressElement = checkoutPage.getInvoiceAddressField();
+        String invoiceAddress = invoiceAddressElement.getText();
+        String[] invoiceAddressLines = invoiceAddress.split("\n");
+        String invoiceName = invoiceAddressLines[1];
+        String invoiceStreet = invoiceAddressLines[2];
+        String invoiceCityZip = invoiceAddressLines[3];
+        String invoiceCountry = invoiceAddressLines[4];
+        String invoicePhone = invoiceAddressLines[5];
+
+        if (Constant.FIRST_NAME.contains(invoiceName) ||
+                Constant.ADDRESS_1.contains(invoiceStreet) ||
+                Constant.CITY.contains(invoiceCityZip) ||
+                Constant.COUNTRY.contains(invoiceCountry) ||
+                Constant.MOBILE_NUMBER.contains(invoicePhone)) {
+            System.out.println("Invoice address matches account information.");
+        } else {
+            System.out.println("Invoice address does not match account information.");
+        }
+
+        Assert.assertNotEquals(checkoutPage.getCheckoutMenTshirtTitle(), Constant.PRODUCTS_TITLE_2);
+        checkoutPage.getCheckoutLeaveCommentField().sendKeys(Constant.COMMENT_ABOUT_ORDER);
+        checkoutPage.clickOnPlaceOrderButton();
+        Thread.sleep(5000);
+
+        System.out.println("Populating Card info.");
+        paymentPage.getPaymentNameOnCard().sendKeys(Constant.NAME_OF_CARD);
+        paymentPage.getPaymentCardNumber().sendKeys(Constant.CARD_NUMBER);
+        paymentPage.getPaymentCVCNumber().sendKeys(Constant.CVC_NUMBER);
+        paymentPage.getPaymentMonthOfExpiration().sendKeys(Constant.MONTH_OF_EXPIRATION);
+        paymentPage.getPaymentYearOfExpiration().sendKeys(Constant.YEAR_OF_EXPIRATION);
+        System.out.println("All madatory fields of Card info have been populated");
+
+        paymentPage.clickOnPayAndConfirmOrderButton();
+        System.out.println("Clicking on Pay and Confirm Order button.");
+        wait.until(ExpectedConditions.visibilityOf(orderConfirmPage.getOrderConfirmSuccessMessage()));
+        Assert.assertEquals(orderConfirmPage.getOrderConfirmSuccessMessage().getText(), Constant.ORDER_SUCCESS_MESSAGE);
+        System.out.println("Order completion success message appeared.");
 
         homepage.clickOnDeleteAccountLink();
 
@@ -229,15 +298,15 @@ public class LoginWithInvalidCredentialsTests {
         } else {
             System.out.println("The page title 'ACCOUNT DELETED!' NOT VISIBLE ");
         }
+        accountDeletePage.clickOnContinueButton();
+
+        Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
+        System.out.println("The user is on homepage again.");
     }
 
     @AfterMethod(alwaysRun = true)
     public void tearDownTest() {
-       System.out.println("Closing automationexercise.com webpage test");
-       driver.close();
-   }
+        System.out.println("Closing automationexercise.com webpage test");
+        driver.close();
+    }
 }
-
-
-
-
