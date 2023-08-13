@@ -26,6 +26,8 @@ public class Homepage {
     private final By homepageSleevelessDressViewProductLink = By.cssSelector("[href='\\/product_details\\/3']");
     private final By homepageMenTshirtAddToCartButton = By.cssSelector(".features_items [class='col-sm-4']:nth-child(4) .text-center .add-to-cart");
     private final By homepageViewCartLink = By.xpath("/html//div[@id='cartModal']//a[@href='/view_cart']/u[.='View Cart']");
+    private final By homepageContinueShoppingButton = By.cssSelector(".btn.btn-block.btn-success.close-modal");
+    private final By homepageSleevelessDressAddToCart = By.cssSelector(".features_items [class='col-sm-4']:nth-child(5) .text-center .add-to-cart");
 
 
     public WebElement getLogoElement() {
@@ -97,6 +99,19 @@ public class Homepage {
     }
     public void clickOnHomepageViewCartLink() {
         element = driver.findElement(homepageViewCartLink);
+        element.click();
+    }
+
+    public WebElement getContinueShoppingButton() {
+        return driver.findElement(homepageContinueShoppingButton);
+    }
+    public void clickONHomepageContinueShoppingButton() {
+        element = driver.findElement(homepageContinueShoppingButton);
+        element.click();
+    }
+
+    public void clickOnSleevelessDressAddToCartButton() {
+        element = driver.findElement(homepageSleevelessDressAddToCart);
         element.click();
     }
 }
