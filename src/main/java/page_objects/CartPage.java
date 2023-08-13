@@ -28,6 +28,9 @@ public class CartPage {
     private final By cartSleevelessDressQuantity = By.cssSelector("tr#product-3 > .cart_quantity");
     private final By cartProceedToCheckoutButton = By.cssSelector(".btn.btn-default.check_out");
     private final By cartRegisterLoginLink = By.xpath("/html//div[@id='checkoutModal']//a[@href='/login']/u[.='Register / Login']");
+    private final By cartDeleteProductFromCartButton1 = By.cssSelector("tr:nth-of-type(1)  .cart_quantity_delete");
+    private final By cartDeleteProductFromCartButton2 = By.cssSelector("tr:nth-of-type(2)  .cart_quantity_delete");
+    private final By cartEmptyCartMessageText = By.cssSelector("span#empty_cart");
 
 
     public WebElement getCartSubscriptionField() {
@@ -99,5 +102,19 @@ public class CartPage {
     public void clickOnCartRegisterLoginLink() {
         element = driver.findElement(cartRegisterLoginLink);
         element.click();
+    }
+
+    public void clickOnDeleteProductFromCartButton1() {
+        element = driver.findElement(cartDeleteProductFromCartButton1);
+        element.click();
+    }
+
+    public void clickOnDeleteProductFromCartButton2() {
+        element = driver.findElement(cartDeleteProductFromCartButton2);
+        element.click();
+    }
+
+    public WebElement getCartEmptyCartMessageText(){
+        return driver.findElement(cartEmptyCartMessageText);
     }
 }
