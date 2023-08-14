@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 public class OrderConfirmPage {
 
     private WebDriver driver;
-    private WebElement element;
 
     public OrderConfirmPage(WebDriver driver) {
         this.driver = driver;

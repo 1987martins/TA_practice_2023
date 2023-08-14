@@ -17,7 +17,7 @@ public class LoginWithInvalidCredentialsTests {
     static class Constant {
         private static final String WEBPAGE_URL = "https://automationexercise.com/";
         private static final String USERNAME = "Pete";
-        private static final String EMAIL_ADDRESS = "936394@mliok.com";
+        private static final String EMAIL_ADDRESS = "MR123@mliok.com";
         private static final String PASSWORD = "123@derek@";
         private static final String DAY_OF_BIRTH = "20";
         private static final String MONTH_OF_BIRTH = "May";
@@ -60,18 +60,18 @@ public class LoginWithInvalidCredentialsTests {
         accountDeletePage = new AccountDeletePage(driver);
     }
 
-    @Test
-// Register new user to test next test
+    @Test(description = "CreatingUserForNextTestScenario", priority = 1)
+    // Register new user to test next test
     public void registerUserForNextTestScenario() {
         System.out.println("Creating User data for next test");
         driver.get(Constant.WEBPAGE_URL);
-        System.out.println("The user is on correct webpage.");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
-        System.out.println("Clicking on Signup/Login link");
+        System.out.println("The user is on correct webpage.");
         homepage.clickOnSignUpLoginLink();
+        System.out.println("Clicking on Signup/Login link");
         boolean a = signUpAndLoginPage.getSignUpTextElement().isDisplayed();
-        if (a){
+        if (a) {
             System.out.println("The title 'New User Signup!' is visible.");
         } else {
             System.out.println("The title 'New User Signup!' is NOT visible.");
@@ -81,7 +81,7 @@ public class LoginWithInvalidCredentialsTests {
         signUpAndLoginPage.getSignUpEmailField().sendKeys(Constant.EMAIL_ADDRESS);
         signUpAndLoginPage.clickOnSignUpButton();
         boolean b = userAccountInfoPage.getEnterAccountInfoTitle().isDisplayed();
-        if (b){
+        if (b) {
             System.out.println("The title 'ENTER ACCOUNT INFORMATION!' is visible.");
         } else {
             System.out.println("The title 'ENTER ACCOUNT INFORMATION!' is NOT visible.");
@@ -91,16 +91,16 @@ public class LoginWithInvalidCredentialsTests {
         userAccountInfoPage.clickOnMRGenderRadioButton();
 
         boolean usernameisvalid = userAccountInfoPage.getUserNameField().isDisplayed();
-        if(usernameisvalid){
+        if (usernameisvalid) {
             System.out.println("The username is equal to entered name in SignUp page.");
-        }else{
+        } else {
             System.out.println("The username is NOT equal to entered name in SignUp page.");
         }
 
         boolean emailisvalid = userAccountInfoPage.getUserEmailField().isDisplayed();
-        if(emailisvalid){
+        if (emailisvalid) {
             System.out.println("The email is equal to entered name in SignUp page.");
-        }else{
+        } else {
             System.out.println("The email is NOT equal to entered name in SignUp page.");
         }
         userAccountInfoPage.getPasswordField().sendKeys(Constant.PASSWORD);
@@ -129,7 +129,7 @@ public class LoginWithInvalidCredentialsTests {
         userAccountInfoPage.clickOnCreateAccountButton();
 
         boolean c = accountConfirmationPage.getAccountCreatedTitle().isDisplayed();
-        if (c){
+        if (c) {
             System.out.println("The page title 'ACCOUNT CREATED!' is visible ");
         } else {
             System.out.println("The page title 'ACCOUNT CREATED!' NOT VISIBLE ");
@@ -141,7 +141,7 @@ public class LoginWithInvalidCredentialsTests {
             Thread.sleep(5000); // Wait for 5 seconds
 
             wait.until(ExpectedConditions.visibilityOf(homepage.getLoggedInAsUser()));
-            if(homepage.getLoggedInAsUser().isDisplayed()) {
+            if (homepage.getLoggedInAsUser().isDisplayed()) {
                 System.out.println("User is looged in");
             } else {
                 System.out.println("User has not been logged in");
@@ -152,9 +152,10 @@ public class LoginWithInvalidCredentialsTests {
 
         homepage.clickOnLogoutUserLink();
         System.out.println("User has logout from his profile");
+        System.out.println("User data has been created for next test");
     }
 
-    @Test
+    @Test(description = "LoginUserWithInvalidCredentialsScenario", priority = 2)
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -165,7 +166,7 @@ public class LoginWithInvalidCredentialsTests {
     7. Click 'login' button
     8. Verify error 'Your email or password is incorrect!' is visible
     */
-    public void LoginUserWithInvalidCredentialsScenario() {
+    public void loginUserWithInvalidCredentialsScenario() {
         driver.get(Constant.WEBPAGE_URL);
         System.out.println("The user is on correct webpage.");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
@@ -173,7 +174,7 @@ public class LoginWithInvalidCredentialsTests {
         System.out.println("Clicking on Signup/Login link");
         homepage.clickOnSignUpLoginLink();
         boolean a = signUpAndLoginPage.getLoginText().isDisplayed();
-        if (a){
+        if (a) {
             System.out.println("The title 'Login to your account' is visible.");
         } else {
             System.out.println("The title 'Login to your account' is NOT visible.");
@@ -212,7 +213,7 @@ public class LoginWithInvalidCredentialsTests {
 
         try {
             wait.until(ExpectedConditions.visibilityOf(homepage.getLoggedInAsUser()));
-            if(homepage.getLoggedInAsUser().isDisplayed()) {
+            if (homepage.getLoggedInAsUser().isDisplayed()) {
                 System.out.println("User is looged in");
             } else {
                 System.out.println("User has not been logged in");
@@ -224,7 +225,7 @@ public class LoginWithInvalidCredentialsTests {
         homepage.clickOnDeleteAccountLink();
 
         boolean f = accountDeletePage.getAccountDeleteTitle().isDisplayed();
-        if (f){
+        if (f) {
             System.out.println("The page title 'ACCOUNT DELETED!' is visible ");
         } else {
             System.out.println("The page title 'ACCOUNT DELETED!' NOT VISIBLE ");
@@ -233,9 +234,9 @@ public class LoginWithInvalidCredentialsTests {
 
     @AfterMethod(alwaysRun = true)
     public void tearDownTest() {
-       System.out.println("Closing automationexercise.com webpage test");
-       driver.close();
-   }
+        System.out.println("Closing automationexercise.com webpage test");
+        driver.close();
+    }
 }
 
 

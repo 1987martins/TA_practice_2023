@@ -17,7 +17,7 @@ public class RegisterUserWithExistingEmailTest {
     static class Constant {
         private static final String WEBPAGE_URL = "https://automationexercise.com/";
         private static final String USERNAME = "Pete";
-        private static final String EMAIL_ADDRESS = "936394@mliok.com";
+        private static final String EMAIL_ADDRESS = "MR@mliok.com";
         private static final String PASSWORD = "123@derek@";
         private static final String DAY_OF_BIRTH = "20";
         private static final String MONTH_OF_BIRTH = "May";
@@ -57,17 +57,18 @@ public class RegisterUserWithExistingEmailTest {
         accountDeletePage = new AccountDeletePage(driver);
     }
 
-    @Test
+    @Test(description = "CreatingUserForNextTestScenario" ,priority = 1)
     // Register new user to test next test
-    public void RegisterUserWithExistingUserScenario() {
+    public void registerUserForNextTestScenario() {
+        System.out.println("Creating User data for next test");
         driver.get(Constant.WEBPAGE_URL);
         System.out.println("The user is on correct webpage.");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
         System.out.println("Clicking on Signup/Login link");
         homepage.clickOnSignUpLoginLink();
-        boolean a = signUpAndLoginPage.getSignUpTextElement().isDisplayed();
-        if (a){
+        boolean signUpText = signUpAndLoginPage.getSignUpTextElement().isDisplayed();
+        if (signUpText) {
             System.out.println("The title 'New User Signup!' is visible.");
         } else {
             System.out.println("The title 'New User Signup!' is NOT visible.");
@@ -76,8 +77,8 @@ public class RegisterUserWithExistingEmailTest {
         signUpAndLoginPage.getSignUpNameField().sendKeys(Constant.USERNAME);
         signUpAndLoginPage.getSignUpEmailField().sendKeys(Constant.EMAIL_ADDRESS);
         signUpAndLoginPage.clickOnSignUpButton();
-        boolean b = userAccountInfoPage.getEnterAccountInfoTitle().isDisplayed();
-        if (b){
+        boolean enterAccountInfo = userAccountInfoPage.getEnterAccountInfoTitle().isDisplayed();
+        if (enterAccountInfo) {
             System.out.println("The title 'ENTER ACCOUNT INFORMATION!' is visible.");
         } else {
             System.out.println("The title 'ENTER ACCOUNT INFORMATION!' is NOT visible.");
@@ -86,17 +87,17 @@ public class RegisterUserWithExistingEmailTest {
         System.out.println("Populating mandatory fields on User detail form");
         userAccountInfoPage.clickOnMRGenderRadioButton();
 
-        boolean usernameisvalid = userAccountInfoPage.getUserNameField().isDisplayed();
-        if(usernameisvalid){
+        boolean userNameIsValid = userAccountInfoPage.getUserNameField().isDisplayed();
+        if (userNameIsValid) {
             System.out.println("The username is equal to entered name in SignUp page.");
-        }else{
+        } else {
             System.out.println("The username is NOT equal to entered name in SignUp page.");
         }
 
-        boolean emailisvalid = userAccountInfoPage.getUserEmailField().isDisplayed();
-        if(emailisvalid){
+        boolean emailIsValid = userAccountInfoPage.getUserEmailField().isDisplayed();
+        if (emailIsValid) {
             System.out.println("The email is equal to entered name in SignUp page.");
-        }else{
+        } else {
             System.out.println("The email is NOT equal to entered name in SignUp page.");
         }
         userAccountInfoPage.getPasswordField().sendKeys(Constant.PASSWORD);
@@ -124,8 +125,8 @@ public class RegisterUserWithExistingEmailTest {
 
         userAccountInfoPage.clickOnCreateAccountButton();
 
-        boolean c = accountConfirmationPage.getAccountCreatedTitle().isDisplayed();
-        if (c){
+        boolean accountCreated = accountConfirmationPage.getAccountCreatedTitle().isDisplayed();
+        if (accountCreated) {
             System.out.println("The page title 'ACCOUNT CREATED!' is visible ");
         } else {
             System.out.println("The page title 'ACCOUNT CREATED!' NOT VISIBLE ");
@@ -135,7 +136,7 @@ public class RegisterUserWithExistingEmailTest {
 
         try {
             wait.until(ExpectedConditions.visibilityOf(homepage.getLoggedInAsUser()));
-            if(homepage.getLoggedInAsUser().isDisplayed()) {
+            if (homepage.getLoggedInAsUser().isDisplayed()) {
                 System.out.println("User is looged in");
             } else {
                 System.out.println("User has not been logged in");
@@ -147,16 +148,15 @@ public class RegisterUserWithExistingEmailTest {
         homepage.clickOnLogoutUserLink();
         System.out.println("User has logout from his profile");
 
-        boolean ad = signUpAndLoginPage.getSignUpTextElement().isDisplayed();
-        if (ad){
+        if (signUpText) {
             System.out.println("The title 'New User Signup!' is visible.");
         } else {
             System.out.println("The title 'New User Signup!' is NOT visible.");
         }
-
+        System.out.println("User data has been created for next test");
     }
 
-    @Test
+    @Test(description = "RegisterUserWithExistingEmailScenario", priority = 2)
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -167,16 +167,15 @@ public class RegisterUserWithExistingEmailTest {
     7. Click 'Signup' button
     8. Verify error 'Email Address already exist!' is visible
     */
-    public void registerUserWithExistingEmail() {
+    public void registerUserWithExistingEmailScenario() {
         driver.get(Constant.WEBPAGE_URL);
-        System.out.println("The user is on correct webpage.");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
         System.out.println("The user is on correct webpage.");
-        System.out.println("Clicking on Signup/Login link");
         homepage.clickOnSignUpLoginLink();
-        boolean a = signUpAndLoginPage.getSignUpTextElement().isDisplayed();
-        if (a){
+        System.out.println("Clicking on Signup/Login link");
+        boolean signUpText = signUpAndLoginPage.getSignUpTextElement().isDisplayed();
+        if (signUpText) {
             System.out.println("The title 'New User Signup!' is visible.");
         } else {
             System.out.println("The title 'New User Signup!' is NOT visible.");
@@ -186,9 +185,9 @@ public class RegisterUserWithExistingEmailTest {
         signUpAndLoginPage.getSignUpEmailField().sendKeys(Constant.EMAIL_ADDRESS);
         signUpAndLoginPage.clickOnSignUpButton();
         boolean errorMessage2 = signUpAndLoginPage.getErrorMessageText2().isDisplayed();
-        if(errorMessage2){
+        if (errorMessage2) {
             System.out.println("The error message 'Email Address already exist!' is visible.");
-        }else{
+        } else {
             System.out.println("The error message 'Email Address already exist!' is NOT visible.");
         }
 
@@ -198,8 +197,8 @@ public class RegisterUserWithExistingEmailTest {
         signUpAndLoginPage.clickOnLoginButton();
         homepage.clickOnDeleteAccountLink();
 
-        boolean f = accountDeletePage.getAccountDeleteTitle().isDisplayed();
-        if (f){
+        boolean accountDeleted = accountDeletePage.getAccountDeleteTitle().isDisplayed();
+        if (accountDeleted) {
             System.out.println("The page title 'ACCOUNT DELETED!' is visible ");
         } else {
             System.out.println("The page title 'ACCOUNT DELETED!' NOT VISIBLE ");
@@ -208,9 +207,9 @@ public class RegisterUserWithExistingEmailTest {
 
     @AfterMethod(alwaysRun = true)
     public void tearDownTest() {
-       System.out.println("Closing automationexercise.com webpage test");
-       driver.close();
-   }
+        System.out.println("Closing automationexercise.com webpage test");
+        driver.close();
+    }
 }
 
 

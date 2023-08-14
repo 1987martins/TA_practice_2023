@@ -15,7 +15,6 @@ import page_objects.Homepage;
 import java.time.Duration;
 
 public class CartSubscriptionTest {
-
     public static class Constant {
         private static final String WEBPAGE_URL = "https://automationexercise.com/";
         private static final String EMAIL_ADDRESS = "man@mliok.com";
@@ -26,7 +25,6 @@ public class CartSubscriptionTest {
     WebDriverWait wait;
     Homepage homepage;
     CartPage cartPage;
-
 
     @BeforeMethod(alwaysRun = true)
     public void openTest() {
@@ -42,7 +40,7 @@ public class CartSubscriptionTest {
         cartPage = new CartPage(driver);
     }
 
-    @Test
+    @Test(description = "CartSubscriptionScenario")
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -53,23 +51,23 @@ public class CartSubscriptionTest {
     7. Enter email address in input and click arrow button
     8. Verify success message 'You have been successfully subscribed!' is visible
      */
-    public void CartSubscriptionScenario() throws InterruptedException {
+    public void cartSubscriptionScenario() throws InterruptedException {
         driver.get(Constant.WEBPAGE_URL);
-        System.out.println("The user is on correct webpage.");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
+        System.out.println("The user is on correct webpage.");
 
         homepage.clickOnCartLink();
         System.out.println("Opening Cart page");
 
         //Scrolling down to Subscription field
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", homepage.getHomepageSubscriptionField());
-        cartPage .getCartSubscriptionField().sendKeys(Constant.EMAIL_ADDRESS);
+        cartPage.getCartSubscriptionField().sendKeys(Constant.EMAIL_ADDRESS);
         System.out.println("Populating email address inside Subscription email address field.");
-        cartPage .clickOnCartSubscribeButton();
+        cartPage.clickOnCartSubscribeButton();
         System.out.println("Clicking on Submit button.");
-        wait.until(ExpectedConditions.visibilityOf(cartPage .getCartSubscriptionSuccessMessage()));
-        Assert.assertEquals(cartPage .getCartSubscriptionSuccessMessage().getText(), Constant.SUBSCRIBE_SUCCESS_MESSAGE);
+        wait.until(ExpectedConditions.visibilityOf(cartPage.getCartSubscriptionSuccessMessage()));
+        Assert.assertEquals(cartPage.getCartSubscriptionSuccessMessage().getText(), Constant.SUBSCRIBE_SUCCESS_MESSAGE);
         System.out.println("Subscription success message appeared.");
     }
 

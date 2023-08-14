@@ -17,18 +17,15 @@ import page_objects.ProductsListingPage;
 import java.time.Duration;
 
 public class ViewCategoryProductAndBrandsTests {
-
     static class Constant {
-
         private final static String WEBPAGE_URL = "https://automationexercise.com/";
-        private final static String CATEGORY_TITLE ="CATEGORY";
-        private final static String BRANDS_TITLE ="Brands";
+        private final static String CATEGORY_TITLE = "CATEGORY";
+        private final static String BRANDS_TITLE = "Brands";
         private final static String CATEGORY_PRODUCT_PAGE_WOMEN_DRESS_TITLE = "Women - Dress Products";
         private final static String CATEGORY_PRODUCT_PAGE_MEN_TSHIRT_TITLE = "Men - Tshirts Products";
         private final static String BRAND_PRODUCT_PAGE_MADAME_TITLE = "Brand - Madame Products";
         private final static String BRAND_PRODUCT_PAGE_BABYHUG_TITLE = "Brand - Babyhug Products";
         private final static String PRODUCTS_PAGE_URL = "https://automationexercise.com/products";
-
     }
 
     ChromeDriver driver;
@@ -37,7 +34,6 @@ public class ViewCategoryProductAndBrandsTests {
     ProductCategoryPage productCategoryPage;
     ProductsListingPage productsListingPage;
     ProductBrandPage productBrandPage;
-
 
     @BeforeMethod(alwaysRun = true)
     public void openTest() {
@@ -55,7 +51,7 @@ public class ViewCategoryProductAndBrandsTests {
         productBrandPage = new ProductBrandPage(driver);
     }
 
-    @Test
+    @Test(description = "ViewCategoryProductScenario", priority = 1)
     /*
    1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -66,11 +62,11 @@ public class ViewCategoryProductAndBrandsTests {
     7. On left side bar, click on any sub-category link of 'Men' category
     8. Verify that user is navigated to that category page
     */
-    public void ViewCategoryProductScenario() throws InterruptedException {
+    public void viewCategoryProductScenario() throws InterruptedException {
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
-        System.out.println("The user is on correct webpage.");
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
+        System.out.println("The user is on correct webpage.");
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", homepage.getHomepageCategoryTitle());
         Assert.assertNotEquals(homepage.getHomepageCategoryTitle(), Constant.CATEGORY_TITLE);
@@ -96,7 +92,7 @@ public class ViewCategoryProductAndBrandsTests {
         System.out.println("User has landed on Men - Tshirts products page.");
     }
 
-    @Test
+    @Test(description = "ViewBrandProductsScenario", priority = 2)
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -107,11 +103,11 @@ public class ViewCategoryProductAndBrandsTests {
     7. On left side bar, click on any other brand link
     8. Verify that user is navigated to that brand page and can see products
     */
-    public void ViewBrandProductsScenario() throws InterruptedException {
+    public void viewBrandProductsScenario() throws InterruptedException {
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
-        System.out.println("The user is on correct webpage.");
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
+        System.out.println("The user is on correct webpage.");
 
         homepage.clickOnProductsLink();
         Thread.sleep(5000);

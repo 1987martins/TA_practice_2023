@@ -6,8 +6,6 @@ import org.openqa.selenium.WebElement;
 
 public class SearchResultPage {
     private WebDriver driver;
-    private WebElement element;
-
     public SearchResultPage(WebDriver driver) {
         this.driver = driver;
     }

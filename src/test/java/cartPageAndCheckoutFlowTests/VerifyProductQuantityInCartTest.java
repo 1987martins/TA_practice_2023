@@ -2,7 +2,6 @@ package cartPageAndCheckoutFlowTests;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -12,18 +11,15 @@ import org.testng.annotations.Test;
 import page_objects.CartPage;
 import page_objects.Homepage;
 import page_objects.ProductsDetailsPage;
-import page_objects.ProductsListingPage;
 
 import java.time.Duration;
 
 public class VerifyProductQuantityInCartTest {
-
     static class Constant {
-
         private final static String WEBPAGE_URL = "https://automationexercise.com/";
         private final static String WEBPAGE_URL_FOR_PDP_3 = "https://automationexercise.com/product_details/3";
         private final static String PRODUCTS_TITLE_3 = "Sleeveless Dress";
-        private final static String PRODUCTS_QUANTITY_3 ="4";
+        private final static String PRODUCTS_QUANTITY_3 = "4";
     }
 
     ChromeDriver driver;
@@ -31,7 +27,6 @@ public class VerifyProductQuantityInCartTest {
     Homepage homepage;
     ProductsDetailsPage productsDetailsPage;
     CartPage cartPage;
-
 
     @BeforeMethod(alwaysRun = true)
     public void openTest() {
@@ -48,7 +43,7 @@ public class VerifyProductQuantityInCartTest {
         productsDetailsPage = new ProductsDetailsPage(driver);
     }
 
-    @Test
+    @Test(description = "VerifyProductQuantityInCartTestScenario")
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -60,7 +55,7 @@ public class VerifyProductQuantityInCartTest {
     8. Click 'View Cart' button
     9. Verify that product is displayed in cart page with exact quantity
     */
-    public void VerifyProductQuantityInCartTestScenario() throws InterruptedException {
+    public void verifyProductQuantityInCartTestScenario() throws InterruptedException {
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         System.out.println("The user is on correct webpage.");

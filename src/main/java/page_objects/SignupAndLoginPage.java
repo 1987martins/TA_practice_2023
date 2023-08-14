@@ -24,11 +24,11 @@ public class SignupAndLoginPage {
     private final By errorMessage1 = By.cssSelector(".login-form > form[method='post'] > p");
     private final By errorMessage2 = By.cssSelector(".signup-form > form[method='post'] > p");
 
-    public WebElement getSignUpTextElement(){
+    public WebElement getSignUpTextElement() {
         return driver.findElement(signUpText);
     }
 
-    public WebElement getSignUpNameField(){
+    public WebElement getSignUpNameField() {
         return driver.findElement(signUpNameField);
     }
 
@@ -36,7 +36,7 @@ public class SignupAndLoginPage {
         driver.findElement(signUpNameField).sendKeys(value);
     }
 
-    public WebElement getSignUpEmailField(){
+    public WebElement getSignUpEmailField() {
         return driver.findElement(signUpEmailField);
     }
 
@@ -57,7 +57,7 @@ public class SignupAndLoginPage {
         return driver.findElement(loginEmailAdressField);
     }
 
-    public void setLoginEmailAddressField(String value){
+    public void setLoginEmailAddressField(String value) {
         driver.findElement(loginEmailAdressField).sendKeys(value);
     }
 

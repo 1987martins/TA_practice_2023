@@ -1,0 +1,56 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="All tests on https://automationexercise.com/ ">
+    <test name="Tests for SignUp and Login">
+        <classes>
+            <class name="signUpandLoginTests.RegisterUserTest"/>
+            <class name="signUpandLoginTests.LoginWithValidCredentialsTest"/>
+            <class name="signUpandLoginTests.LogoutUserTest"/>
+            <class name="signUpandLoginTests.LoginWithInvalidCredentialsTests"/>
+            <class name="signUpandLoginTests.RegisterUserWithExistingEmailTest"/>
+        </classes>
+    </test>
+
+    <test name="Smoke tests">
+        <classes>
+            <class name="ContactUsFormTest"/>
+        </classes>
+    </test>
+
+    <test name="Tests on PDP and PLP">
+        <classes>
+            <class name="productsPageAndProductListingPageTests.SearchProductTest"/>
+            <class name="productsPageAndProductListingPageTests.VerifyAllProductsAndProductDetailPageTest"/>
+            <class name="productsPageAndProductListingPageTests.ViewCategoryProductAndBrandsTests"/>
+        </classes>
+    </test>
+
+    <test name="Tests on Cart page and Checkout flow">
+        <classes>
+            <class name="cartPageAndCheckoutFlowTests.AddingTwoProductsToTheCartTest"/>
+            <class name="cartPageAndCheckoutFlowTests.LoginBeforeCheckout"/>
+            <class name="cartPageAndCheckoutFlowTests.RegisterUserBeforeCheckout"/>
+            <class name="cartPageAndCheckoutFlowTests.RegisterUserWhileInCheckout"/>
+            <class name="cartPageAndCheckoutFlowTests.RemovingProductsFromCartTest"/>
+            <class name="cartPageAndCheckoutFlowTests.VerifyProductQuantityInCartTest"/>
+        </classes>
+    </test>
+
+    <test name="Tests on Cart page and Checkout flow">
+        <classes>
+            <class name="cartPageAndCheckoutFlowTests.AddingTwoProductsToTheCartTest"/>
+            <class name="cartPageAndCheckoutFlowTests.LoginBeforeCheckout"/>
+            <class name="cartPageAndCheckoutFlowTests.RegisterUserBeforeCheckout"/>
+            <class name="cartPageAndCheckoutFlowTests.RegisterUserWhileInCheckout"/>
+            <class name="cartPageAndCheckoutFlowTests.RemovingProductsFromCartTest"/>
+            <class name="cartPageAndCheckoutFlowTests.VerifyProductQuantityInCartTest"/>
+        </classes>
+    </test>
+
+    <test name="Tests on Subscription">
+        <classes>
+            <class name="subscriptionTests.CartSubscriptionTest"/>
+            <class name="subscriptionTests.HomepageSubscriptionTest"/>
+        </classes>
+    </test>
+
+</suite>

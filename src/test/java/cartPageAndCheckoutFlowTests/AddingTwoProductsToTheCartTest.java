@@ -2,7 +2,6 @@ package cartPageAndCheckoutFlowTests;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -13,19 +12,16 @@ import page_objects.CartPage;
 import page_objects.Homepage;
 import page_objects.ProductsListingPage;
 
-
 import java.time.Duration;
 
 public class AddingTwoProductsToTheCartTest {
-
     static class Constant {
-
         private final static String WEBPAGE_URL = "https://automationexercise.com/";
         private final static String PRODUCTS_TITLE_1 = "Blue Top";
         private final static String PRODUCTS_PRICE_1 = "Rs. 500";
         private final static String PRODUCTS_TITLE_2 = "Men Tshirt";
         private final static String PRODUCTS_PRICE_2 = "Rs. 400";
-        private final static String PRODUCTS_QUANTITY_1 ="1";
+        private final static String PRODUCTS_QUANTITY_1 = "1";
     }
 
     ChromeDriver driver;
@@ -33,7 +29,6 @@ public class AddingTwoProductsToTheCartTest {
     Homepage homepage;
     ProductsListingPage productsListingPage;
     CartPage cartPage;
-
 
     @BeforeMethod(alwaysRun = true)
     public void openTest() {
@@ -50,7 +45,7 @@ public class AddingTwoProductsToTheCartTest {
         cartPage = new CartPage(driver);
     }
 
-    @Test
+    @Test(description = "VerifyAllProductsAndProductDetailPageScenario")
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -63,18 +58,18 @@ public class AddingTwoProductsToTheCartTest {
     9. Verify both products are added to Cart
     10. Verify their prices, quantity and total price
     */
-    public void VerifyAllProductsAndProductDetailPageScenario() throws InterruptedException {
+    public void verifyAllProductsAndProductDetailPageScenario() throws InterruptedException {
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
-        System.out.println("The user is on correct webpage.");
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
+        System.out.println("The user is on correct webpage.");
 
         homepage.clickOnProductsLink();
         Thread.sleep(5000);
         boolean productListingPageTitle = productsListingPage.getProductsListingPageTitle().isDisplayed();
-        if(productListingPageTitle){
+        if (productListingPageTitle) {
             System.out.println("The products listing page title 'ALL PRODUCTS' is visible.");
-        }else{
+        } else {
             System.out.println("The products listing page title 'ALL PRODUCTS' is NOT visible.");
         }
 
