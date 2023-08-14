@@ -22,7 +22,6 @@ public class ProductsDetailsPage {
     private final By detailPageAddToCartButton = By.cssSelector(".btn.btn-default.cart");
     private final By detailPageViewCartLink = By.cssSelector(".modal-confirm.modal-dialog a");
 
-
     public WebElement getDetailPageProductsName() {
         return driver.findElement(detailPageProductsName);
     }

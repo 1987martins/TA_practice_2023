@@ -12,7 +12,6 @@ import page_objects.*;
 import java.time.Duration;
 
 public class ContactUsFormTest {
-
     public static class Constant {
         private static final String WEBPAGE_URL = "https://automationexercise.com/";
         private static final String USERNAME = "Peter";
@@ -43,7 +42,7 @@ public class ContactUsFormTest {
         contactUsForm = new ContactUsForm(driver);
     }
 
-    @Test
+    @Test(description = "ContactUsFormScenario")
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -57,15 +56,15 @@ public class ContactUsFormTest {
     10. Verify success message 'Success! Your details have been submitted successfully.' is visible
     11. Click 'Home' button and verify that landed to home page successfully
      */
-    public void ContactUsFormScenario() throws InterruptedException {
+    public void contactUsFormScenario() throws InterruptedException {
         driver.get(Constant.WEBPAGE_URL);
-        System.out.println("The user is on correct webpage.");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
+        System.out.println("The user is on correct webpage.");
         homepage.clickOnContactUsLink();
 
         boolean a = contactUsForm.getContactUsTitle().isDisplayed();
-        if (a){
+        if (a) {
             System.out.println("The title 'GET IN TOUCH' is visible.");
         } else {
             System.out.println("The title 'GET IN TOUCH' is NOT visible.");
@@ -79,20 +78,19 @@ public class ContactUsFormTest {
         contactUsForm.clickOnContactUsSubmitButton();
         Thread.sleep(2000);
         System.out.println("Accepting alert pop window");
-        alert=driver.switchTo().alert();
+        alert = driver.switchTo().alert();
         alert.accept();
 
         boolean contactusuccessmessage = contactUsForm.getContactUsSuccessMessage().isDisplayed();
-        if(contactusuccessmessage){
+        if (contactusuccessmessage) {
             System.out.println("The error message 'Success! Your details have been submitted successfully.' is visible.");
-        }else{
+        } else {
             System.out.println("The error message 'Success! Your details have been submitted successfully.' is NOT visible.");
         }
         contactUsForm.clickOnContactUsHomeButton();
-        System.out.println("User is on homepage");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
+        System.out.println("User is on homepage");
     }
-
 
     @AfterMethod(alwaysRun = true)
     public void tearDownTest() {

@@ -16,8 +16,8 @@ public class Homepage {
     private final By signUpLoginLink = By.cssSelector(".nav.navbar-nav > li:nth-of-type(4) > a");
     private final By loggedInAsUser = By.cssSelector("li:nth-of-type(10) > a");
     private final By deleteAccountLink = By.cssSelector(".nav.navbar-nav > li:nth-of-type(5) > a");
-    private final By logoutUserLink  = By.cssSelector(".nav.navbar-nav > li:nth-of-type(4) > a");
-    private final By contactUsLink  = By.cssSelector("li:nth-of-type(8) > a");
+    private final By logoutUserLink = By.cssSelector(".nav.navbar-nav > li:nth-of-type(4) > a");
+    private final By contactUsLink = By.cssSelector("li:nth-of-type(8) > a");
     private final By productsLink = By.cssSelector(".nav.navbar-nav > li:nth-of-type(2) > a");
     private final By homepageSubscriptionField = By.xpath("/html//input[@id='susbscribe_email']");
     private final By homepageSubscribeButton = By.xpath("/html//button[@id='subscribe']");
@@ -34,26 +34,26 @@ public class Homepage {
     private final By homepageWomenCategoryDress = By.cssSelector("[href='\\/category_products\\/1']");
     private final By homepageMenCategoryTshirts = By.cssSelector("[href='\\/category_products\\/3']");
 
-
     public WebElement getHomepageCategoryTitle() {
         return driver.findElement(homepageCategoryTitle);
     }
 
     public void clickOnHomepageWomenCategory() {
-        element =  driver.findElement(homepageWomenCategory);
+        element = driver.findElement(homepageWomenCategory);
         element.click();
     }
 
     public void clickOnHomepageMenCategory() {
-        element =  driver.findElement(homepageMenCategory);
+        element = driver.findElement(homepageMenCategory);
         element.click();
     }
 
     public WebElement getHomepageWomenCategoryDress() {
         return driver.findElement(homepageWomenCategoryDress);
     }
+
     public void clickOnHomepageWomenCategoryDress() {
-        element =  driver.findElement(homepageWomenCategoryDress);
+        element = driver.findElement(homepageWomenCategoryDress);
         element.click();
     }
 
@@ -63,28 +63,29 @@ public class Homepage {
 
 
     public void clickOnHomepageMenCategoryTshirts() {
-        element =  driver.findElement(homepageMenCategoryTshirts);
+        element = driver.findElement(homepageMenCategoryTshirts);
         element.click();
     }
 
     public WebElement getLogoElement() {
         return driver.findElement(logo);
     }
-    public void clickOnSignUpLoginLink(){
+
+    public void clickOnSignUpLoginLink() {
         element = driver.findElement(signUpLoginLink);
         element.click();
     }
 
-    public WebElement getLoggedInAsUser(){
+    public WebElement getLoggedInAsUser() {
         return driver.findElement(loggedInAsUser);
     }
 
-    public void clickOnDeleteAccountLink(){
+    public void clickOnDeleteAccountLink() {
         element = driver.findElement(deleteAccountLink);
         element.click();
     }
 
-    public void clickOnLogoutUserLink(){
+    public void clickOnLogoutUserLink() {
         element = driver.findElement(logoutUserLink);
         element.click();
     }
@@ -107,16 +108,16 @@ public class Homepage {
         driver.findElement(homepageSubscriptionField).sendKeys(value);
     }
 
-    public void clickOnHomepageSubscribeButton(){
+    public void clickOnHomepageSubscribeButton() {
         element = driver.findElement(homepageSubscribeButton);
         element.click();
     }
 
-    public WebElement getHomepageSubscriptionSusccessMessage(){
+    public WebElement getHomepageSubscriptionSusccessMessage() {
         return driver.findElement(homepageSubscriptionSuccessMessage);
     }
 
-    public void clickOnCartLink(){
+    public void clickOnCartLink() {
         element = driver.findElement(cartLink);
         element.click();
     }
@@ -134,6 +135,7 @@ public class Homepage {
     public WebElement getHomepageViewCartLink() {
         return driver.findElement(homepageViewCartLink);
     }
+
     public void clickOnHomepageViewCartLink() {
         element = driver.findElement(homepageViewCartLink);
         element.click();
@@ -142,6 +144,7 @@ public class Homepage {
     public WebElement getContinueShoppingButton() {
         return driver.findElement(homepageContinueShoppingButton);
     }
+
     public void clickONHomepageContinueShoppingButton() {
         element = driver.findElement(homepageContinueShoppingButton);
         element.click();

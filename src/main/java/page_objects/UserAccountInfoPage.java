@@ -41,7 +41,8 @@ public class UserAccountInfoPage {
     public WebElement getMrGenderRadioButton() {
         return driver.findElement(mrGenderRadioButton);
     }
-    public void clickOnMRGenderRadioButton(){
+
+    public void clickOnMRGenderRadioButton() {
         element = driver.findElement(mrGenderRadioButton);
         element.click();
     }

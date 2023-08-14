@@ -39,11 +39,11 @@ public class ProductsListingPage {
         element.click();
     }
 
-    public WebElement getSearchInputField(){
+    public WebElement getSearchInputField() {
         return driver.findElement(searchInputField);
     }
 
-    public void setSearchInputField(String value){
+    public void setSearchInputField(String value) {
         driver.findElement(searchInputField).sendKeys(value);
     }
 

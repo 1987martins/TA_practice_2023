@@ -15,9 +15,7 @@ import page_objects.ProductsListingPage;
 import java.time.Duration;
 
 public class VerifyAllProductsAndProductDetailPageTest {
-
     static class Constant {
-
         private final static String WEBPAGE_URL = "https://automationexercise.com/";
         private final static String PRODUCTS_DETAILS_PAGE_1_URL = "https://automationexercise.com/product_details/1";
         private final static String PRODUCTS_TITLE_1 = "Blue Top";
@@ -49,7 +47,7 @@ public class VerifyAllProductsAndProductDetailPageTest {
         productsDetailsPage = new ProductsDetailsPage(driver);
     }
 
-    @Test
+    @Test(description = "VerifyAllProductsAndProductDetailPageScenario")
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -61,23 +59,23 @@ public class VerifyAllProductsAndProductDetailPageTest {
     8. User is landed to product detail page
     9. Verify that product details is visible: product name, category, price, availability, condition, brand
     */
-    public void VerifyAllProductsAndProductDetailPageScenario() throws InterruptedException {
+    public void verifyAllProductsAndProductDetailPageScenario() throws InterruptedException {
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
-        System.out.println("The user is on correct webpage.");
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
+        System.out.println("The user is on correct webpage.");
 
         homepage.clickOnProductsLink();
         Thread.sleep(5000);
-        boolean productlistingpagetitle = productsListingPage.getProductsListingPageTitle().isDisplayed();
-        if(productlistingpagetitle){
+        boolean productListingPageTitle = productsListingPage.getProductsListingPageTitle().isDisplayed();
+        if (productListingPageTitle) {
             System.out.println("The products listing page title 'ALL PRODUCTS' is visible.");
-        }else{
+        } else {
             System.out.println("The products listing page title 'ALL PRODUCTS' is NOT visible.");
         }
 
-        boolean productslist = productsListingPage.getProductsList().isDisplayed();
-        if(productslist) {
+        boolean productsList = productsListingPage.getProductsList().isDisplayed();
+        if (productsList) {
             System.out.println("Product list is Displayed");
         } else {
             System.out.println("Products list is NOT Displayed");

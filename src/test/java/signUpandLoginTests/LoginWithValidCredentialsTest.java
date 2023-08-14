@@ -17,7 +17,7 @@ public class LoginWithValidCredentialsTest {
     static class Constant {
         private static final String WEBPAGE_URL = "https://automationexercise.com/";
         private static final String USERNAME = "Pete";
-        private static final String EMAIL_ADDRESS = "936394@mliok.com";
+        private static final String EMAIL_ADDRESS = "MR94@mliok.com";
         private static final String PASSWORD = "123@derek@";
         private static final String DAY_OF_BIRTH = "20";
         private static final String MONTH_OF_BIRTH = "May";
@@ -57,17 +57,18 @@ public class LoginWithValidCredentialsTest {
         accountDeletePage = new AccountDeletePage(driver);
     }
 
-    @Test
+    @Test(description = "CreatingUserForNextTestScenario", priority = 1)
     // Register new user to test next test
-    public void registerUserScenario() {
+    public void registerUserForNextTestScenario() {
+        System.out.println("Creating User data for next test.");
         driver.get(Constant.WEBPAGE_URL);
-        System.out.println("The user is on correct webpage.");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
-        System.out.println("Clicking on Signup/Login link");
+        System.out.println("The user is on correct webpage.");
         homepage.clickOnSignUpLoginLink();
-        boolean a = signUpAndLoginPage.getSignUpTextElement().isDisplayed();
-        if (a){
+        System.out.println("Clicking on Signup/Login link");
+        boolean signUpText = signUpAndLoginPage.getSignUpTextElement().isDisplayed();
+        if (signUpText) {
             System.out.println("The title 'New User Signup!' is visible.");
         } else {
             System.out.println("The title 'New User Signup!' is NOT visible.");
@@ -76,8 +77,8 @@ public class LoginWithValidCredentialsTest {
         signUpAndLoginPage.getSignUpNameField().sendKeys(Constant.USERNAME);
         signUpAndLoginPage.getSignUpEmailField().sendKeys(Constant.EMAIL_ADDRESS);
         signUpAndLoginPage.clickOnSignUpButton();
-        boolean b = userAccountInfoPage.getEnterAccountInfoTitle().isDisplayed();
-        if (b){
+        boolean enterAccountInfo = userAccountInfoPage.getEnterAccountInfoTitle().isDisplayed();
+        if (enterAccountInfo) {
             System.out.println("The title 'ENTER ACCOUNT INFORMATION!' is visible.");
         } else {
             System.out.println("The title 'ENTER ACCOUNT INFORMATION!' is NOT visible.");
@@ -86,17 +87,17 @@ public class LoginWithValidCredentialsTest {
         System.out.println("Populating mandatory fields on User detail form");
         userAccountInfoPage.clickOnMRGenderRadioButton();
 
-        boolean usernameisvalid = userAccountInfoPage.getUserNameField().isDisplayed();
-        if(usernameisvalid){
+        boolean userNameIsValid = userAccountInfoPage.getUserNameField().isDisplayed();
+        if (userNameIsValid) {
             System.out.println("The username is equal to entered name in SignUp page.");
-        }else{
+        } else {
             System.out.println("The username is NOT equal to entered name in SignUp page.");
         }
 
-        boolean emailisvalid = userAccountInfoPage.getUserEmailField().isDisplayed();
-        if(emailisvalid){
+        boolean emailIsValid = userAccountInfoPage.getUserEmailField().isDisplayed();
+        if (emailIsValid) {
             System.out.println("The email is equal to entered name in SignUp page.");
-        }else{
+        } else {
             System.out.println("The email is NOT equal to entered name in SignUp page.");
         }
         userAccountInfoPage.getPasswordField().sendKeys(Constant.PASSWORD);
@@ -124,8 +125,8 @@ public class LoginWithValidCredentialsTest {
 
         userAccountInfoPage.clickOnCreateAccountButton();
 
-        boolean c = accountConfirmationPage.getAccountCreatedTitle().isDisplayed();
-        if (c){
+        boolean accountCreated = accountConfirmationPage.getAccountCreatedTitle().isDisplayed();
+        if (accountCreated) {
             System.out.println("The page title 'ACCOUNT CREATED!' is visible ");
         } else {
             System.out.println("The page title 'ACCOUNT CREATED!' NOT VISIBLE ");
@@ -137,7 +138,7 @@ public class LoginWithValidCredentialsTest {
             Thread.sleep(5000); // Wait for 5 seconds
 
             wait.until(ExpectedConditions.visibilityOf(homepage.getLoggedInAsUser()));
-            if(homepage.getLoggedInAsUser().isDisplayed()) {
+            if (homepage.getLoggedInAsUser().isDisplayed()) {
                 System.out.println("User is looged in");
             } else {
                 System.out.println("User has not been logged in");
@@ -148,9 +149,10 @@ public class LoginWithValidCredentialsTest {
 
         homepage.clickOnLogoutUserLink();
         System.out.println("User has logout from his profile");
+        System.out.println("User data has been created for next test");
     }
 
-    @Test
+    @Test(description = "LoginUserWithValidCredentialsScenario", priority = 2)
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -163,7 +165,7 @@ public class LoginWithValidCredentialsTest {
     9. Click 'Delete Account' button
     10. Verify that 'ACCOUNT DELETED!' is visible
     */
-    public void LoginUserWithValidCredentialsScenario() {
+    public void loginUserWithValidCredentialsScenario() {
         driver.get(Constant.WEBPAGE_URL);
         System.out.println("The user is on correct webpage.");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
@@ -171,8 +173,8 @@ public class LoginWithValidCredentialsTest {
         System.out.println("The user is on correct webpage.");
         System.out.println("Clicking on Signup/Login link");
         homepage.clickOnSignUpLoginLink();
-        boolean a = signUpAndLoginPage.getLoginText().isDisplayed();
-        if (a){
+        boolean loginText = signUpAndLoginPage.getLoginText().isDisplayed();
+        if (loginText) {
             System.out.println("The title 'Login to your account' is visible.");
         } else {
             System.out.println("The title 'Login to your account' is NOT visible.");
@@ -184,7 +186,7 @@ public class LoginWithValidCredentialsTest {
 
         try {
             wait.until(ExpectedConditions.visibilityOf(homepage.getLoggedInAsUser()));
-            if(homepage.getLoggedInAsUser().isDisplayed()) {
+            if (homepage.getLoggedInAsUser().isDisplayed()) {
                 System.out.println("User is looged in");
             } else {
                 System.out.println("User has not been logged in");
@@ -195,8 +197,8 @@ public class LoginWithValidCredentialsTest {
 
         homepage.clickOnDeleteAccountLink();
 
-        boolean f = accountDeletePage.getAccountDeleteTitle().isDisplayed();
-        if (f){
+        boolean accountDelete = accountDeletePage.getAccountDeleteTitle().isDisplayed();
+        if (accountDelete) {
             System.out.println("The page title 'ACCOUNT DELETED!' is visible ");
         } else {
             System.out.println("The page title 'ACCOUNT DELETED!' NOT VISIBLE ");
@@ -205,9 +207,9 @@ public class LoginWithValidCredentialsTest {
 
     @AfterMethod(alwaysRun = true)
     public void tearDownTest() {
-       System.out.println("Closing automationexercise.com webpage test");
-       driver.close();
-   }
+        System.out.println("Closing automationexercise.com webpage test");
+        driver.close();
+    }
 }
 
 

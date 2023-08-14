@@ -22,17 +22,16 @@ public class PaymentPage {
     public final By paymentSuccessMessage = By.cssSelector("div#success_message > .alert.alert-success");
 
 
-
     public WebElement getPaymentNameOnCard() {
         return driver.findElement(paymentNameOnCard);
     }
 
     public void setPaymentNameOnCard(String value) {
-         driver.findElement(paymentNameOnCard).sendKeys();
+        driver.findElement(paymentNameOnCard).sendKeys();
     }
 
     public void setPaymentCardNumber(String value) {
-         driver.findElement(paymentCardNumber).sendKeys(value);
+        driver.findElement(paymentCardNumber).sendKeys(value);
     }
 
     public WebElement getPaymentCardNumber() {
@@ -40,7 +39,7 @@ public class PaymentPage {
     }
 
     public void setPaymentCVCNumber(String value) {
-         driver.findElement(paymentCVCNumber).sendKeys(value);
+        driver.findElement(paymentCVCNumber).sendKeys(value);
     }
 
     public WebElement getPaymentCVCNumber() {
@@ -48,7 +47,7 @@ public class PaymentPage {
     }
 
     public void setPaymentMonthOfExpiration(String value) {
-         driver.findElement(paymentMonthOfExpiration).sendKeys(value);
+        driver.findElement(paymentMonthOfExpiration).sendKeys(value);
     }
 
     public WebElement getPaymentMonthOfExpiration() {
@@ -56,21 +55,21 @@ public class PaymentPage {
     }
 
     public void setPaymentYearOfExpiration(String value) {
-         driver.findElement(paymentYearOfExpiration).sendKeys(value);
+        driver.findElement(paymentYearOfExpiration).sendKeys(value);
     }
 
     public WebElement getPaymentYearOfExpiration() {
         return driver.findElement(paymentYearOfExpiration);
     }
 
-   public void clickOnPayAndConfirmOrderButton() {
+    public void clickOnPayAndConfirmOrderButton() {
         element = driver.findElement(payAndConfirmOrderButton);
         element.click();
-   }
+    }
 
-   public WebElement getPaymentSuccessMessage() {
+    public WebElement getPaymentSuccessMessage() {
         return driver.findElement(paymentSuccessMessage);
-   }
+    }
 
 
 }

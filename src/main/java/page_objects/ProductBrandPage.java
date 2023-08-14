@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 
 public class ProductBrandPage {
     private WebDriver driver;
-    private WebElement element;
 
     public ProductBrandPage(WebDriver driver) {
         this.driver = driver;

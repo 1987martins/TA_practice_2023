@@ -1,6 +1,5 @@
 package subscriptionTests;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -15,7 +14,6 @@ import page_objects.Homepage;
 import java.time.Duration;
 
 public class HomepageSubscriptionTest {
-
     public static class Constant {
         private static final String WEBPAGE_URL = "https://automationexercise.com/";
         private static final String EMAIL_ADDRESS = "6394@mliok.com";
@@ -25,7 +23,6 @@ public class HomepageSubscriptionTest {
     ChromeDriver driver;
     WebDriverWait wait;
     Homepage homepage;
-
 
     @BeforeMethod(alwaysRun = true)
     public void openTest() {
@@ -40,7 +37,7 @@ public class HomepageSubscriptionTest {
         homepage = new Homepage(driver);
     }
 
-    @Test
+    @Test(description = "HomepageSubscriptionScenario")
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -50,11 +47,11 @@ public class HomepageSubscriptionTest {
     6. Enter email address in input and click arrow button
     7. Verify success message 'You have been successfully subscribed!' is visible
      */
-    public void HomepageSubscriptionScenario() throws InterruptedException {
+    public void homepageSubscriptionScenario() throws InterruptedException {
         driver.get(Constant.WEBPAGE_URL);
-        System.out.println("The user is on correct webpage.");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
+        System.out.println("The user is on correct webpage.");
 
         //Scrolling down to Subscription field
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", homepage.getHomepageSubscriptionField());

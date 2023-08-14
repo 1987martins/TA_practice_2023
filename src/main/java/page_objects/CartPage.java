@@ -32,7 +32,6 @@ public class CartPage {
     private final By cartDeleteProductFromCartButton2 = By.cssSelector("tr:nth-of-type(2)  .cart_quantity_delete");
     private final By cartEmptyCartMessageText = By.cssSelector("span#empty_cart");
 
-
     public WebElement getCartSubscriptionField() {
         return driver.findElement(cartSubscriptionField);
     }
@@ -114,7 +113,7 @@ public class CartPage {
         element.click();
     }
 
-    public WebElement getCartEmptyCartMessageText(){
+    public WebElement getCartEmptyCartMessageText() {
         return driver.findElement(cartEmptyCartMessageText);
     }
 }

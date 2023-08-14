@@ -25,48 +25,53 @@ public class ContactUsForm {
     public WebElement getContactUsNameField() {
         return driver.findElement(contactUsNameField);
     }
-    public void setContactUsNameField(String value){
+
+    public void setContactUsNameField(String value) {
         driver.findElement(contactUsNameField).sendKeys(value);
     }
 
     public WebElement getContactUsEmailField() {
         return driver.findElement(contactUsEmailField);
     }
-    public void setContactUsEmailField(String value){
+
+    public void setContactUsEmailField(String value) {
         driver.findElement(contactUsEmailField).sendKeys(value);
     }
 
     public WebElement getContactUsSubjectField() {
         return driver.findElement(contactUsSubjectField);
     }
-    public void setContactUsSubjectField(String value){
+
+    public void setContactUsSubjectField(String value) {
         driver.findElement(contactUsSubjectField).sendKeys(value);
     }
 
     public WebElement getContactUsMessageField() {
         return driver.findElement(contactUsMessageField);
     }
-    public void setContactUsMessageField(String value){
+
+    public void setContactUsMessageField(String value) {
         driver.findElement(contactUsMessageField).sendKeys(value);
     }
 
-    public WebElement getContactUsChooseFileButton(){
+    public WebElement getContactUsChooseFileButton() {
         return driver.findElement(contactUsChooseFileButton);
     }
 
-    public void setContactUsChooseFileButton(String value){
+    public void setContactUsChooseFileButton(String value) {
         driver.findElement(contactUsChooseFileButton).sendKeys(value);
     }
 
-    public void clickOnContactUsSubmitButton(){
+    public void clickOnContactUsSubmitButton() {
         element = driver.findElement(contactUsSubmitButton);
         element.click();
     }
 
-    public WebElement getContactUsSuccessMessage(){
+    public WebElement getContactUsSuccessMessage() {
         return driver.findElement(contactUsSuccessMessage);
     }
-    public void clickOnContactUsHomeButton(){
+
+    public void clickOnContactUsHomeButton() {
         element = driver.findElement(contactUsHomeButton);
         element.click();
     }

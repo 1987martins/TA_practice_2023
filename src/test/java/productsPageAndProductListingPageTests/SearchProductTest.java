@@ -10,18 +10,15 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import page_objects.Homepage;
-import page_objects.ProductsDetailsPage;
 import page_objects.ProductsListingPage;
 import page_objects.SearchResultPage;
 
 import java.time.Duration;
 
 public class SearchProductTest {
-
     static class Constant {
-
         private final static String WEBPAGE_URL = "https://automationexercise.com/";
-        private final static String SEARCH_ITEM_TEXT ="Winter top";
+        private final static String SEARCH_ITEM_TEXT = "Winter top";
         private final static String SEARCH_RESULT_ITEMS_TITLE = "Winter Top";
     }
 
@@ -43,12 +40,12 @@ public class SearchProductTest {
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         homepage = new Homepage(driver);
-        productsListingPage= new ProductsListingPage(driver);
+        productsListingPage = new ProductsListingPage(driver);
         searchResultPage = new SearchResultPage(driver);
         actions = new Actions(driver);
     }
 
-    @Test
+    @Test(description = "SearchProductScenario")
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -59,18 +56,18 @@ public class SearchProductTest {
     7. Verify 'SEARCHED PRODUCTS' is visible
     8. Verify all the products related to search are visible
     */
-    public void SearchProductScenario() throws InterruptedException {
+    public void searchProductScenario() throws InterruptedException {
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
-        System.out.println("The user is on correct webpage.");
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
+        System.out.println("The user is on correct webpage.");
 
         homepage.clickOnProductsLink();
         Thread.sleep(5000);
-        boolean productlistingpagetitle = productsListingPage.getProductsListingPageTitle().isDisplayed();
-        if(productlistingpagetitle){
+        boolean productListingPageTitle = productsListingPage.getProductsListingPageTitle().isDisplayed();
+        if (productListingPageTitle) {
             System.out.println("The products listing page title 'ALL PRODUCTS' is visible.");
-        }else{
+        } else {
             System.out.println("The products listing page title 'ALL PRODUCTS' is NOT visible.");
         }
 
@@ -78,10 +75,10 @@ public class SearchProductTest {
         productsListingPage.getSearchInputField().sendKeys(Constant.SEARCH_ITEM_TEXT);
         productsListingPage.clickOnSearchButton();
 
-        boolean searchresultpagetitle = searchResultPage.getSearchResultPageTitle().isDisplayed();
-        if(searchresultpagetitle){
+        boolean searchResultPagetTitle = searchResultPage.getSearchResultPageTitle().isDisplayed();
+        if (searchResultPagetTitle) {
             System.out.println("The search result page title 'SEARCHED PRODUCTS' is visible.");
-        }else{
+        } else {
             System.out.println("The search result page title 'SEARCHED PRODUCTS' is NOT visible.");
         }
 

@@ -15,14 +15,11 @@ import page_objects.*;
 import java.time.Duration;
 
 public class LoginBeforeCheckout {
-
     static class Constant {
-
         private final static String WEBPAGE_URL = "https://automationexercise.com/";
-        private final static String WEBPAGE_URL_FOR_PDP_3 = "https://automationexercise.com/product_details/3";
         private final static String CART_URL = "https://automationexercise.com/view_cart";
         private static final String USERNAME = "Pete";
-        private static final String EMAIL_ADDRESS = "2953@mliok.com";
+        private static final String EMAIL_ADDRESS = "MR47@mliok.com";
         private static final String PASSWORD = "123@derek@";
         private static final String DAY_OF_BIRTH = "20";
         private static final String MONTH_OF_BIRTH = "May";
@@ -80,17 +77,19 @@ public class LoginBeforeCheckout {
 
     }
 
-    @Test
-    public void RegisterUserBeforeNextTestScenario() {
+    @Test(description = "RegisterUserForNextTestScenario", priority = 1)
+    // Register new user to test next test
+    public void registerUserForNextTestScenario() {
         System.out.println("Creating User data for next test");
         driver.get(Constant.WEBPAGE_URL);
-        System.out.println("The user is on correct webpage.");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
-        System.out.println("Clicking on Signup/Login link");
+        System.out.println("The user is on correct webpage.");
+
         homepage.clickOnSignUpLoginLink();
-        boolean a = signUpAndLoginPage.getSignUpTextElement().isDisplayed();
-        if (a){
+        System.out.println("Clicking on Signup/Login link");
+        boolean signUpText = signUpAndLoginPage.getSignUpTextElement().isDisplayed();
+        if (signUpText) {
             System.out.println("The title 'New User Signup!' is visible.");
         } else {
             System.out.println("The title 'New User Signup!' is NOT visible.");
@@ -99,8 +98,8 @@ public class LoginBeforeCheckout {
         signUpAndLoginPage.getSignUpNameField().sendKeys(Constant.USERNAME);
         signUpAndLoginPage.getSignUpEmailField().sendKeys(Constant.EMAIL_ADDRESS);
         signUpAndLoginPage.clickOnSignUpButton();
-        boolean b = userAccountInfoPage.getEnterAccountInfoTitle().isDisplayed();
-        if (b){
+        boolean enterAccountInfo = userAccountInfoPage.getEnterAccountInfoTitle().isDisplayed();
+        if (enterAccountInfo) {
             System.out.println("The title 'ENTER ACCOUNT INFORMATION!' is visible.");
         } else {
             System.out.println("The title 'ENTER ACCOUNT INFORMATION!' is NOT visible.");
@@ -109,17 +108,17 @@ public class LoginBeforeCheckout {
         System.out.println("Populating mandatory fields on User detail form");
         userAccountInfoPage.clickOnMRGenderRadioButton();
 
-        boolean usernameisvalid = userAccountInfoPage.getUserNameField().isDisplayed();
-        if(usernameisvalid){
+        boolean userNameIsValid = userAccountInfoPage.getUserNameField().isDisplayed();
+        if (userNameIsValid) {
             System.out.println("The username is equal to entered name in SignUp page.");
-        }else{
+        } else {
             System.out.println("The username is NOT equal to entered name in SignUp page.");
         }
 
-        boolean emailisvalid = userAccountInfoPage.getUserEmailField().isDisplayed();
-        if(emailisvalid){
+        boolean emailIsValid = userAccountInfoPage.getUserEmailField().isDisplayed();
+        if (emailIsValid) {
             System.out.println("The email is equal to entered name in SignUp page.");
-        }else{
+        } else {
             System.out.println("The email is NOT equal to entered name in SignUp page.");
         }
         userAccountInfoPage.getPasswordField().sendKeys(Constant.PASSWORD);
@@ -147,8 +146,8 @@ public class LoginBeforeCheckout {
 
         userAccountInfoPage.clickOnCreateAccountButton();
 
-        boolean c = accountConfirmationPage.getAccountCreatedTitle().isDisplayed();
-        if (c){
+        boolean accountCreated = accountConfirmationPage.getAccountCreatedTitle().isDisplayed();
+        if (accountCreated) {
             System.out.println("The page title 'ACCOUNT CREATED!' is visible ");
         } else {
             System.out.println("The page title 'ACCOUNT CREATED!' NOT VISIBLE ");
@@ -160,7 +159,7 @@ public class LoginBeforeCheckout {
             Thread.sleep(5000); // Wait for 5 seconds
 
             wait.until(ExpectedConditions.visibilityOf(homepage.getLoggedInAsUser()));
-            if(homepage.getLoggedInAsUser().isDisplayed()) {
+            if (homepage.getLoggedInAsUser().isDisplayed()) {
                 System.out.println("User is looged in");
             } else {
                 System.out.println("User has not been logged in");
@@ -173,7 +172,7 @@ public class LoginBeforeCheckout {
         System.out.println("User data has been created for next test");
     }
 
-    @Test
+    @Test(description = "LoginBeforeCheckoutScenario", priority = 2)
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -193,15 +192,15 @@ public class LoginBeforeCheckout {
     16. Click 'Delete Account' button
     17. Verify 'ACCOUNT DELETED!' and click 'Continue' button
     */
-    public void LoginBeforeCheckoutScenario() throws InterruptedException {
+    public void loginBeforeCheckoutScenario() throws InterruptedException {
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
-        System.out.println("The user is on correct webpage.");
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
+        System.out.println("The user is on correct webpage.");
 
         homepage.clickOnSignUpLoginLink();
-        boolean a = signUpAndLoginPage.getLoginText().isDisplayed();
-        if (a){
+        boolean loginText = signUpAndLoginPage.getLoginText().isDisplayed();
+        if (loginText) {
             System.out.println("The title 'Login to your account' is visible.");
         } else {
             System.out.println("The title 'Login to your account' is NOT visible.");
@@ -213,7 +212,7 @@ public class LoginBeforeCheckout {
 
         try {
             wait.until(ExpectedConditions.visibilityOf(homepage.getLoggedInAsUser()));
-            if(homepage.getLoggedInAsUser().isDisplayed()) {
+            if (homepage.getLoggedInAsUser().isDisplayed()) {
                 System.out.println("User is looged in");
             } else {
                 System.out.println("User has not been logged in");
@@ -221,7 +220,7 @@ public class LoginBeforeCheckout {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         homepage.clickOnHomepageMenTshirtAddToCartButton();
         System.out.println("Adding product to the cart");
 
@@ -292,8 +291,8 @@ public class LoginBeforeCheckout {
 
         homepage.clickOnDeleteAccountLink();
 
-        boolean f = accountDeletePage.getAccountDeleteTitle().isDisplayed();
-        if (f){
+        boolean accountDelete = accountDeletePage.getAccountDeleteTitle().isDisplayed();
+        if (accountDelete) {
             System.out.println("The page title 'ACCOUNT DELETED!' is visible ");
         } else {
             System.out.println("The page title 'ACCOUNT DELETED!' NOT VISIBLE ");

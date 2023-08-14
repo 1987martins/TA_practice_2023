@@ -1,7 +1,5 @@
 package cartPageAndCheckoutFlowTests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,12 +13,9 @@ import page_objects.Homepage;
 import page_objects.ProductsListingPage;
 
 import java.time.Duration;
-import java.util.List;
 
 public class RemovingProductsFromCartTest {
-
     static class Constant {
-
         private final static String WEBPAGE_URL = "https://automationexercise.com/";
         private final static String PRODUCTS_TITLE_1 = "Men Tshirt";
         private final static String PRODUCTS_TITLE_2 = "Sleeveless Dress";
@@ -31,7 +26,6 @@ public class RemovingProductsFromCartTest {
     Homepage homepage;
     ProductsListingPage productsListingPage;
     CartPage cartPage;
-
 
     @BeforeMethod(alwaysRun = true)
     public void openTest() {
@@ -48,7 +42,7 @@ public class RemovingProductsFromCartTest {
         cartPage = new CartPage(driver);
     }
 
-    @Test
+    @Test(description = "RemovingProductsFromCartScenario")
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -59,7 +53,7 @@ public class RemovingProductsFromCartTest {
     7. Click 'X' button corresponding to particular product
     8. Verify that product is removed from the cart
     */
-    public void RemovingProductsFromCartScenario() throws InterruptedException {
+    public void removingProductsFromCartScenario() throws InterruptedException {
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         System.out.println("The user is on correct webpage.");
@@ -88,7 +82,7 @@ public class RemovingProductsFromCartTest {
 
         wait.until(ExpectedConditions.visibilityOf(cartPage.getCartEmptyCartMessageText()));
         boolean emptyCartMessage = cartPage.getCartEmptyCartMessageText().isDisplayed();
-        if(emptyCartMessage){
+        if (emptyCartMessage) {
             System.out.println("Products removed successfully and Empty cart message is visible");
         } else {
             System.out.println("Products removal failed.");
