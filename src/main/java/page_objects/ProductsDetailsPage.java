@@ -69,5 +69,4 @@ public class ProductsDetailsPage {
         element = driver.findElement(detailPageViewCartLink);
         element.click();
     }
-
 }
