@@ -28,7 +28,44 @@ public class Homepage {
     private final By homepageViewCartLink = By.xpath("/html//div[@id='cartModal']//a[@href='/view_cart']/u[.='View Cart']");
     private final By homepageContinueShoppingButton = By.cssSelector(".btn.btn-block.btn-success.close-modal");
     private final By homepageSleevelessDressAddToCart = By.cssSelector(".features_items [class='col-sm-4']:nth-child(5) .text-center .add-to-cart");
+    private final By homepageCategoryTitle = By.cssSelector(".left-sidebar > h2:nth-of-type(1)");
+    private final By homepageWomenCategory = By.cssSelector("#accordian .panel-default:nth-of-type(1) .pull-right");
+    private final By homepageMenCategory = By.cssSelector("#accordian .panel-default:nth-of-type(2) .pull-right");
+    private final By homepageWomenCategoryDress = By.cssSelector("[href='\\/category_products\\/1']");
+    private final By homepageMenCategoryTshirts = By.cssSelector("[href='\\/category_products\\/3']");
 
+
+    public WebElement getHomepageCategoryTitle() {
+        return driver.findElement(homepageCategoryTitle);
+    }
+
+    public void clickOnHomepageWomenCategory() {
+        element =  driver.findElement(homepageWomenCategory);
+        element.click();
+    }
+
+    public void clickOnHomepageMenCategory() {
+        element =  driver.findElement(homepageMenCategory);
+        element.click();
+    }
+
+    public WebElement getHomepageWomenCategoryDress() {
+        return driver.findElement(homepageWomenCategoryDress);
+    }
+    public void clickOnHomepageWomenCategoryDress() {
+        element =  driver.findElement(homepageWomenCategoryDress);
+        element.click();
+    }
+
+    public WebElement getHomepageMenCategoryTshirts() {
+        return driver.findElement(homepageMenCategoryTshirts);
+    }
+
+
+    public void clickOnHomepageMenCategoryTshirts() {
+        element =  driver.findElement(homepageMenCategoryTshirts);
+        element.click();
+    }
 
     public WebElement getLogoElement() {
         return driver.findElement(logo);

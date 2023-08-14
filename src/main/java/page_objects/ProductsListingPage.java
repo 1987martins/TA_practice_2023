@@ -22,6 +22,9 @@ public class ProductsListingPage {
     private final By menTshirtAddToCartButton = By.cssSelector(".features_items [class='col-sm-4']:nth-child(4) .text-center .add-to-cart");
     private final By continueShoppingButton = By.cssSelector(".btn.btn-block.btn-success.close-modal");
     private final By viewCartLink = By.cssSelector(".modal-confirm.modal-dialog a");
+    private final By productsBrandsTitle = By.cssSelector(".brands_products > h2");
+    private final By productsBrandMadameLink = By.cssSelector("[href='\\/brand_products\\/Madame']");
+    private final By productsBrandBabyHugLink = By.cssSelector("[href='\\/brand_products\\/Babyhug']");
 
     public WebElement getProductsListingPageTitle() {
         return driver.findElement(productsListingPageTitle);
@@ -66,6 +69,20 @@ public class ProductsListingPage {
 
     public void clickOnViewCartLink() {
         element = driver.findElement(viewCartLink);
+        element.click();
+    }
+
+    public WebElement getProductsBrandsTitle() {
+        return driver.findElement(productsBrandsTitle);
+    }
+
+    public void clickOnProductBrandMadameLink() {
+        element = driver.findElement(productsBrandMadameLink);
+        element.click();
+    }
+
+    public void clickOnProductBrandBabyhugLink() {
+        element = driver.findElement(productsBrandBabyHugLink);
         element.click();
     }
 }
