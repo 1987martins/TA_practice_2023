@@ -1,4 +1,6 @@
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -42,7 +44,7 @@ public class ContactUsFormTest {
         contactUsForm = new ContactUsForm(driver);
     }
 
-    @Test(description = "ContactUsFormScenario")
+    @Test(description = "Contact Us Form Scenario")
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -57,6 +59,7 @@ public class ContactUsFormTest {
     11. Click 'Home' button and verify that landed to home page successfully
      */
     public void contactUsFormScenario() throws InterruptedException {
+        System.out.println("<-- Contact Us Form Scenario -->");
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
@@ -83,10 +86,15 @@ public class ContactUsFormTest {
 
         boolean contactusuccessmessage = contactUsForm.getContactUsSuccessMessage().isDisplayed();
         if (contactusuccessmessage) {
-            System.out.println("The error message 'Success! Your details have been submitted successfully.' is visible.");
+            System.out.println("The success message 'Success! Your details have been submitted successfully.' is visible.");
         } else {
-            System.out.println("The error message 'Success! Your details have been submitted successfully.' is NOT visible.");
+            System.out.println("The success message 'Success! Your details have been submitted successfully.' is NOT visible.");
         }
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("google_vignette")));
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("document.getElementById('google_vignette').style.display = 'none';");
+
         contactUsForm.clickOnContactUsHomeButton();
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         System.out.println("User is on homepage");

@@ -57,14 +57,15 @@ public class LogoutUserTest {
         accountDeletePage = new AccountDeletePage(driver);
     }
 
-    @Test(description = "CreatingUserForNextTestScenario", priority = 1)
+    @Test(description = "Creating User data for User Logout Scenario", priority = 1)
     // Register new user to test next test
     public void registerUserForNextTestScenario() {
-        System.out.println("Creating User data for next test.");
+        System.out.println("<-- Creating User data for User Logout Scenario -->");
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
         System.out.println("The user is on correct webpage.");
+
         homepage.clickOnSignUpLoginLink();
         System.out.println("Clicking on Signup/Login link");
         boolean signUpText = signUpAndLoginPage.getSignUpTextElement().isDisplayed();
@@ -158,7 +159,7 @@ public class LogoutUserTest {
         System.out.println("User data has been created for next test");
     }
 
-    @Test(description = "UserLogoutScenario", priority = 2)
+    @Test(description = "User Logout Scenario", priority = 2)
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -172,12 +173,15 @@ public class LogoutUserTest {
     10. Verify that user is navigated to login page
     */
     public void userLogoutScenario() throws InterruptedException {
+        System.out.println("<-- User Logout Scenario -->");
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
         System.out.println("The user is on correct webpage.");
-        System.out.println("Clicking on Signup/Login link");
+
+
         homepage.clickOnSignUpLoginLink();
+        System.out.println("Clicking on Signup/Login link");
         boolean loginText = signUpAndLoginPage.getLoginText().isDisplayed();
         if (loginText) {
             System.out.println("The title 'Login to your account' is visible.");

@@ -51,7 +51,7 @@ public class ViewCategoryProductAndBrandsTests {
         productBrandPage = new ProductBrandPage(driver);
     }
 
-    @Test(description = "ViewCategoryProductScenario", priority = 1)
+    @Test(description = "View Category Product Scenario", priority = 1)
     /*
    1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -63,6 +63,7 @@ public class ViewCategoryProductAndBrandsTests {
     8. Verify that user is navigated to that category page
     */
     public void viewCategoryProductScenario() throws InterruptedException {
+        System.out.println("<-- View Category Product Scenario -->");
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
@@ -92,7 +93,7 @@ public class ViewCategoryProductAndBrandsTests {
         System.out.println("User has landed on Men - Tshirts products page.");
     }
 
-    @Test(description = "ViewBrandProductsScenario", priority = 2)
+    @Test(description = "View Brand Products Scenario", priority = 2)
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -104,6 +105,7 @@ public class ViewCategoryProductAndBrandsTests {
     8. Verify that user is navigated to that brand page and can see products
     */
     public void viewBrandProductsScenario() throws InterruptedException {
+        System.out.println("<-- View Brand Products Scenario -->");
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));

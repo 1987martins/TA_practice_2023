@@ -47,7 +47,8 @@ public class HomepageSubscriptionTest {
     6. Enter email address in input and click arrow button
     7. Verify success message 'You have been successfully subscribed!' is visible
      */
-    public void homepageSubscriptionScenario() throws InterruptedException {
+    public void homepageSubscriptionScenario() {
+        System.out.println("<-- Homepage Subscription Scenario --> ");
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));

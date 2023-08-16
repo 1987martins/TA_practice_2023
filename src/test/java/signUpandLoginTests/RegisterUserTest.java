@@ -57,7 +57,7 @@ public class RegisterUserTest {
         accountDeletePage = new AccountDeletePage(driver);
     }
 
-    @Test(description = "RegisterUserScenario")
+    @Test(description = "Register User Scenario")
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -79,10 +79,12 @@ public class RegisterUserTest {
     18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
     */
     public void registerUserScenario() {
+        System.out.println("<-- Register User Scenario -->");
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
         System.out.println("The user is on correct webpage.");
+
         homepage.clickOnSignUpLoginLink();
         System.out.println("Clicking on Signup/Login link");
         boolean signUpText = signUpAndLoginPage.getSignUpTextElement().isDisplayed();
