@@ -76,7 +76,7 @@ public class RegisterUserBeforeCheckout {
         orderConfirmPage = new OrderConfirmPage(driver);
     }
 
-    @Test(description = "RegisterUserBeforeCheckoutScenario")
+    @Test(description = "Register User Before Checkout Scenario")
     /*
    1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -98,6 +98,7 @@ public class RegisterUserBeforeCheckout {
     18. Verify 'ACCOUNT DELETED!' and click 'Continue' button
     */
     public void registerUserBeforeCheckoutScenario() throws InterruptedException {
+        System.out.println("<-- Register User Before Checkout Scenario -->");
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));

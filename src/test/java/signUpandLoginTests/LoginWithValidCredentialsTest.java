@@ -57,14 +57,15 @@ public class LoginWithValidCredentialsTest {
         accountDeletePage = new AccountDeletePage(driver);
     }
 
-    @Test(description = "CreatingUserForNextTestScenario", priority = 1)
+    @Test(description = "Creating User data for Login User With Valid Credentials Scenario", priority = 1)
     // Register new user to test next test
     public void registerUserForNextTestScenario() {
-        System.out.println("Creating User data for next test.");
+        System.out.println("<-- Creating User data for Login User With Valid Credentials Scenario -->");
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
         System.out.println("The user is on correct webpage.");
+
         homepage.clickOnSignUpLoginLink();
         System.out.println("Clicking on Signup/Login link");
         boolean signUpText = signUpAndLoginPage.getSignUpTextElement().isDisplayed();
@@ -152,7 +153,7 @@ public class LoginWithValidCredentialsTest {
         System.out.println("User data has been created for next test");
     }
 
-    @Test(description = "LoginUserWithValidCredentialsScenario", priority = 2)
+    @Test(description = "Login User With Valid Credentials Scenario", priority = 2)
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -166,13 +167,15 @@ public class LoginWithValidCredentialsTest {
     10. Verify that 'ACCOUNT DELETED!' is visible
     */
     public void loginUserWithValidCredentialsScenario() {
+        System.out.println("<-- Login User With Valid Credentials Scenario -->");
         driver.get(Constant.WEBPAGE_URL);
-        System.out.println("The user is on correct webpage.");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
         System.out.println("The user is on correct webpage.");
-        System.out.println("Clicking on Signup/Login link");
+
+
         homepage.clickOnSignUpLoginLink();
+        System.out.println("Clicking on Signup/Login link");
         boolean loginText = signUpAndLoginPage.getLoginText().isDisplayed();
         if (loginText) {
             System.out.println("The title 'Login to your account' is visible.");

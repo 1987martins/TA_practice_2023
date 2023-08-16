@@ -43,7 +43,7 @@ public class VerifyProductQuantityInCartTest {
         productsDetailsPage = new ProductsDetailsPage(driver);
     }
 
-    @Test(description = "VerifyProductQuantityInCartTestScenario")
+    @Test(description = "Verify Product Quantity In Cart Test Scenario")
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -56,10 +56,11 @@ public class VerifyProductQuantityInCartTest {
     9. Verify that product is displayed in cart page with exact quantity
     */
     public void verifyProductQuantityInCartTestScenario() throws InterruptedException {
+        System.out.println("<-- Verify Product Quantity In Cart Test Scenario -->");
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
-        System.out.println("The user is on correct webpage.");
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
+        System.out.println("The user is on correct webpage.");
 
         homepage.clickOnHomepageSleevelessDressViewProductLink();
         Thread.sleep(5000);

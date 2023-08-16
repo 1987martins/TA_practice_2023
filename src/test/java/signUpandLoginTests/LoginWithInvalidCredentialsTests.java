@@ -60,14 +60,15 @@ public class LoginWithInvalidCredentialsTests {
         accountDeletePage = new AccountDeletePage(driver);
     }
 
-    @Test(description = "CreatingUserForNextTestScenario", priority = 1)
+    @Test(description = "Creating User data for Login User With Invalid Credentials Scenario", priority = 1)
     // Register new user to test next test
     public void registerUserForNextTestScenario() {
-        System.out.println("Creating User data for next test");
+        System.out.println("<-- Creating User data for Login User With Invalid Credentials Scenario -->");
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
         System.out.println("The user is on correct webpage.");
+
         homepage.clickOnSignUpLoginLink();
         System.out.println("Clicking on Signup/Login link");
         boolean a = signUpAndLoginPage.getSignUpTextElement().isDisplayed();
@@ -76,7 +77,7 @@ public class LoginWithInvalidCredentialsTests {
         } else {
             System.out.println("The title 'New User Signup!' is NOT visible.");
         }
-        System.out.println("Populating mandatory fields");
+        System.out.println("Populating mandatory fields.");
         signUpAndLoginPage.getSignUpNameField().sendKeys(Constant.USERNAME);
         signUpAndLoginPage.getSignUpEmailField().sendKeys(Constant.EMAIL_ADDRESS);
         signUpAndLoginPage.clickOnSignUpButton();
@@ -87,7 +88,7 @@ public class LoginWithInvalidCredentialsTests {
             System.out.println("The title 'ENTER ACCOUNT INFORMATION!' is NOT visible.");
         }
 
-        System.out.println("Populating mandatory fields on User detail form");
+        System.out.println("Populating mandatory fields on User detail form.");
         userAccountInfoPage.clickOnMRGenderRadioButton();
 
         boolean usernameisvalid = userAccountInfoPage.getUserNameField().isDisplayed();
@@ -130,9 +131,9 @@ public class LoginWithInvalidCredentialsTests {
 
         boolean c = accountConfirmationPage.getAccountCreatedTitle().isDisplayed();
         if (c) {
-            System.out.println("The page title 'ACCOUNT CREATED!' is visible ");
+            System.out.println("The page title 'ACCOUNT CREATED!' is visible.");
         } else {
-            System.out.println("The page title 'ACCOUNT CREATED!' NOT VISIBLE ");
+            System.out.println("The page title 'ACCOUNT CREATED!' NOT VISIBLE.");
         }
 
         accountConfirmationPage.clickOnContinueButton();
@@ -142,20 +143,20 @@ public class LoginWithInvalidCredentialsTests {
 
             wait.until(ExpectedConditions.visibilityOf(homepage.getLoggedInAsUser()));
             if (homepage.getLoggedInAsUser().isDisplayed()) {
-                System.out.println("User is looged in");
+                System.out.println("User is looged in.");
             } else {
-                System.out.println("User has not been logged in");
+                System.out.println("User has not been logged in.");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         homepage.clickOnLogoutUserLink();
-        System.out.println("User has logout from his profile");
-        System.out.println("User data has been created for next test");
+        System.out.println("User has logout from his profile.");
+        System.out.println("User data has been created for next test.");
     }
 
-    @Test(description = "LoginUserWithInvalidCredentialsScenario", priority = 2)
+    @Test(description = "Login User With Invalid Credentials Scenario.", priority = 2)
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -167,11 +168,13 @@ public class LoginWithInvalidCredentialsTests {
     8. Verify error 'Your email or password is incorrect!' is visible
     */
     public void loginUserWithInvalidCredentialsScenario() {
+        System.out.println("<-- Login User With Invalid Credentials Scenario. -->");
         driver.get(Constant.WEBPAGE_URL);
-        System.out.println("The user is on correct webpage.");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
-        System.out.println("Clicking on Signup/Login link");
+        System.out.println("The user is on correct webpage.");
+
+        System.out.println("Clicking on Signup/Login link.");
         homepage.clickOnSignUpLoginLink();
         boolean a = signUpAndLoginPage.getLoginText().isDisplayed();
         if (a) {
@@ -183,7 +186,7 @@ public class LoginWithInvalidCredentialsTests {
         signUpAndLoginPage.getLoginPasswordField().sendKeys(Constant.INCORRECT_PASWORD);
         signUpAndLoginPage.clickOnLoginButton();
         Assert.assertEquals(signUpAndLoginPage.getErrorMessageText1().getText(), Constant.ERROR_MESSAGE);
-        System.out.println("User cannot log in using INVALID PASSWORD, getting error message");
+        System.out.println("User cannot log in using INVALID PASSWORD, getting error message.");
 
         signUpAndLoginPage.clearEmailAddressField();
         signUpAndLoginPage.clearPasswordField();
@@ -192,7 +195,7 @@ public class LoginWithInvalidCredentialsTests {
         signUpAndLoginPage.getLoginPasswordField().sendKeys(Constant.PASSWORD);
         signUpAndLoginPage.clickOnLoginButton();
         Assert.assertEquals(signUpAndLoginPage.getErrorMessageText1().getText(), Constant.ERROR_MESSAGE);
-        System.out.println("User cannot log in using INVALID EMAIL ADRRESS, getting error message");
+        System.out.println("User cannot log in using INVALID EMAIL ADRRESS, getting error message.");
 
         signUpAndLoginPage.clearEmailAddressField();
         signUpAndLoginPage.clearPasswordField();
@@ -201,7 +204,7 @@ public class LoginWithInvalidCredentialsTests {
         signUpAndLoginPage.getLoginPasswordField().sendKeys(Constant.PASSWORD);
         signUpAndLoginPage.clickOnLoginButton();
         Assert.assertEquals(signUpAndLoginPage.getErrorMessageText1().getText(), Constant.ERROR_MESSAGE);
-        System.out.println("User cannot log in using INVALID BOTH CREDENTIALS, getting error message");
+        System.out.println("User cannot log in using INVALID BOTH CREDENTIALS, getting error message.");
 
         signUpAndLoginPage.clearEmailAddressField();
         signUpAndLoginPage.clearPasswordField();
@@ -214,9 +217,9 @@ public class LoginWithInvalidCredentialsTests {
         try {
             wait.until(ExpectedConditions.visibilityOf(homepage.getLoggedInAsUser()));
             if (homepage.getLoggedInAsUser().isDisplayed()) {
-                System.out.println("User is looged in");
+                System.out.println("User is looged in.");
             } else {
-                System.out.println("User has not been logged in");
+                System.out.println("User has not been logged in.");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -226,15 +229,15 @@ public class LoginWithInvalidCredentialsTests {
 
         boolean f = accountDeletePage.getAccountDeleteTitle().isDisplayed();
         if (f) {
-            System.out.println("The page title 'ACCOUNT DELETED!' is visible ");
+            System.out.println("The page title 'ACCOUNT DELETED!' is visible. ");
         } else {
-            System.out.println("The page title 'ACCOUNT DELETED!' NOT VISIBLE ");
+            System.out.println("The page title 'ACCOUNT DELETED!' NOT VISIBLE. ");
         }
     }
 
     @AfterMethod(alwaysRun = true)
     public void tearDownTest() {
-        System.out.println("Closing automationexercise.com webpage test");
+        System.out.println("Closing automationexercise.com webpage test.");
         driver.close();
     }
 }

@@ -77,10 +77,10 @@ public class LoginBeforeCheckout {
 
     }
 
-    @Test(description = "RegisterUserForNextTestScenario", priority = 1)
+    @Test(description = "Creating User data for Login Before Checkout Scenario", priority = 1)
     // Register new user to test next test
     public void registerUserForNextTestScenario() {
-        System.out.println("Creating User data for next test");
+        System.out.println("Creating User data for Login Before Checkout Scenario -->");
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
@@ -172,7 +172,7 @@ public class LoginBeforeCheckout {
         System.out.println("User data has been created for next test");
     }
 
-    @Test(description = "LoginBeforeCheckoutScenario", priority = 2)
+    @Test(description = "Login Before Checkout Scenario", priority = 2)
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -193,6 +193,7 @@ public class LoginBeforeCheckout {
     17. Verify 'ACCOUNT DELETED!' and click 'Continue' button
     */
     public void loginBeforeCheckoutScenario() throws InterruptedException {
+        System.out.println("<-- Login Before Checkout Scenario --> ");
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));

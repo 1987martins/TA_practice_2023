@@ -47,7 +47,7 @@ public class VerifyAllProductsAndProductDetailPageTest {
         productsDetailsPage = new ProductsDetailsPage(driver);
     }
 
-    @Test(description = "VerifyAllProductsAndProductDetailPageScenario")
+    @Test(description = "Verify All Products And Product Detail Page Scenario")
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -60,6 +60,7 @@ public class VerifyAllProductsAndProductDetailPageTest {
     9. Verify that product details is visible: product name, category, price, availability, condition, brand
     */
     public void verifyAllProductsAndProductDetailPageScenario() throws InterruptedException {
+        System.out.println("<-- Verify All Products And Product Detail Page Scenario -->");
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));

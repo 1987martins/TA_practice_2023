@@ -42,7 +42,7 @@ public class RemovingProductsFromCartTest {
         cartPage = new CartPage(driver);
     }
 
-    @Test(description = "RemovingProductsFromCartScenario")
+    @Test(description = "Removing Products From Cart Scenario")
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -54,10 +54,11 @@ public class RemovingProductsFromCartTest {
     8. Verify that product is removed from the cart
     */
     public void removingProductsFromCartScenario() throws InterruptedException {
+        System.out.println("<-- Removing Products From Cart Scenario -->");
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
-        System.out.println("The user is on correct webpage.");
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
+        System.out.println("The user is on correct webpage.");
 
         homepage.clickOnHomepageMenTshirtAddToCartButton();
         System.out.println("Adding product to the cart.");

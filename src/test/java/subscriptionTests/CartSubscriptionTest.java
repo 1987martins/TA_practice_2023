@@ -40,7 +40,7 @@ public class CartSubscriptionTest {
         cartPage = new CartPage(driver);
     }
 
-    @Test(description = "CartSubscriptionScenario")
+    @Test(description = "Cart Subscription Scenario")
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -51,7 +51,8 @@ public class CartSubscriptionTest {
     7. Enter email address in input and click arrow button
     8. Verify success message 'You have been successfully subscribed!' is visible
      */
-    public void cartSubscriptionScenario() throws InterruptedException {
+    public void cartSubscriptionScenario() {
+        System.out.println("<-- Cart Subscription Scenario -->");
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));

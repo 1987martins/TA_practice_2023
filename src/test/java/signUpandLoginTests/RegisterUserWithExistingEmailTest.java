@@ -57,14 +57,15 @@ public class RegisterUserWithExistingEmailTest {
         accountDeletePage = new AccountDeletePage(driver);
     }
 
-    @Test(description = "CreatingUserForNextTestScenario" ,priority = 1)
+    @Test(description = "Creating User data for Register User With Existing Email Scenario" ,priority = 1)
     // Register new user to test next test
     public void registerUserForNextTestScenario() {
-        System.out.println("Creating User data for next test");
+        System.out.println("Creating User data for Register User With Existing Email Scenario");
         driver.get(Constant.WEBPAGE_URL);
-        System.out.println("The user is on correct webpage.");
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
+        System.out.println("The user is on correct webpage.");
+
         System.out.println("Clicking on Signup/Login link");
         homepage.clickOnSignUpLoginLink();
         boolean signUpText = signUpAndLoginPage.getSignUpTextElement().isDisplayed();
@@ -156,7 +157,7 @@ public class RegisterUserWithExistingEmailTest {
         System.out.println("User data has been created for next test");
     }
 
-    @Test(description = "RegisterUserWithExistingEmailScenario", priority = 2)
+    @Test(description = "Register User With Existing Email Scenario", priority = 2)
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -168,10 +169,12 @@ public class RegisterUserWithExistingEmailTest {
     8. Verify error 'Email Address already exist!' is visible
     */
     public void registerUserWithExistingEmailScenario() {
+        System.out.println("<-- register User With Existing Email Scenario -->");
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
         System.out.println("The user is on correct webpage.");
+
         homepage.clickOnSignUpLoginLink();
         System.out.println("Clicking on Signup/Login link");
         boolean signUpText = signUpAndLoginPage.getSignUpTextElement().isDisplayed();

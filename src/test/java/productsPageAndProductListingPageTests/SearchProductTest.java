@@ -45,7 +45,7 @@ public class SearchProductTest {
         actions = new Actions(driver);
     }
 
-    @Test(description = "SearchProductScenario")
+    @Test(description = "Search Product Scenario")
     /*
     1. Launch browser
     2. Navigate to url 'http://automationexercise.com'
@@ -57,6 +57,7 @@ public class SearchProductTest {
     8. Verify all the products related to search are visible
     */
     public void searchProductScenario() throws InterruptedException {
+        System.out.println("<-- Search Product Scenario -->");
         driver.get(Constant.WEBPAGE_URL);
         Assert.assertEquals(driver.getCurrentUrl(), Constant.WEBPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(homepage.getLogoElement()));
